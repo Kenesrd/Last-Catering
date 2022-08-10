@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/products" method="GET">
+    <div>Поиск по названию:</div>
+    <input type="text" name="title">
+    <button type="submit">Поиск</button>
+</form>
+
+<div th:each="product : ${products}">
+    <h1 th:text="${product.title}"></h1>
+    <div>Description : <p th:text="${product.description}"></p></div>
+    <div>Rating : <p th:text="${product.rating}"></p></div>
+    <div>Количества или шт : <p th:text="${product.weightAndPiece}"></p></div>
+    <div>Цена : <p th:text="${product.price}"></p></div>
+    <div>Фото : <img th:src="@{/images/{id}(id=${product.image.id})}"/></div>
+    <div>Какому типу принадлежить : <p th:text="${product.productTypes} ?: '(Не Найдено)'"></p></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/catering
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+
+
+

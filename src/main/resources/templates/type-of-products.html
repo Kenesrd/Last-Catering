@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN PANEL</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>CATERING</h1>
+
+<!--===================Create PRODUCT==================-->
+<h1>Создать новый Тип</h1>
+<form th:action="@{/types/update}" method="POST" th:object="${productType}">
+    <input type="hidden"  th:field="*{id}"/>
+    Наименование Типа : <input type="text" name="typeName" th:field="*{typeName}"><br/>
+    <button type="submit" th:text="${productType.id > 0 ? 'Изменить' : 'Создать'}"/>
+</form>
+
+<!--===============Type TABLE============-->
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название Типа</th>
+        <th>Дата Создания</th>
+        <th>Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="type : ${prodtypes}">
+        <!--/*@thymesVar id="type" type="com.example.api.entities.ProductType"*/-->
+        <td th:text="${type.id}"/>
+        <td th:text="${type.typeName}"/>
+        <td th:text="${#dates.format(type.createdAt, 'dd.MM.yyyy E - k:mm ')}"/>
+        <td>
+            <a th:href="@{/types/edit/{id}(id = ${type.id})}" th:text="Edit"/>
+            <a th:href="@{/types/delete/{id}(id = ${type.id})}" th:text="Delete"/>
+        </td>
+        <td>
+            <!--                <form th:action="@{/products/delete/{id}(id=${product.id})}" th:method="POST">-->
+            <!--&lt;!&ndash;                    <input type="hidden" name="id" th:value="${product.id}" />&ndash;&gt;-->
+            <!--                    <button type="submit">Delete</button>-->
+            <!--                </form>-->
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--<span th:text="${'Всего товаров ' + prodtypes.size()}"/>-->
+
+
+</body>
+</html>
