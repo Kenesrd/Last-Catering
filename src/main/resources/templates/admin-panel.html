@@ -3,84 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <title>ADMIN PANEL</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/default.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/admin-panel-header.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css">-->
 </head>
-<body>
-<h1>CATERING</h1>
+<head th:replace="~{fragments/admin-panel-header::header-head}"/>
 
-<!--===================Create PRODUCT==================-->
-    <h1>Создать новый Товар</h1>
-    <!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
-    <form th:action="@{/create}" method="POST" th:object="${product}" enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}">
-        <!--/*@thymesVar id="image" type="com.example.api.entities.Image"*/-->
-        <input type="hidden" name="image" th:value="${image}">
-        Image : <input type="file" name="file"><br/>
-        Title : <input type="text"  name="title"th:field="*{title}"><br/>
-        Description : <input type="text" name="description" th:field="*{description}"><br/>
-        Количество грамм или кг : <input type="text" name="weightAndPiece" th:field="*{weightAndPiece}"><br/>
-        <label for="type">Choose type</label>
-        <select required th:field="*{productType}" id="type">
-            <option value="">Nothing selected</option>
-            <!--/*@thymesVar id="type" type="com.example.api.entities.ProductType"*/-->
-            <option th:each="type : ${types}"
-                    th:value="${type.getId()}"
-                    th:text="${type.typeName}"/>
-        </select>
-        Цена : <input type="number" name="price" th:field="*{price}"><br/>
-        <button type="submit">Создать</button>
-    </form>
+<body>
+<!--/*@thymesVar id="sort" type="com.example.api.services.props.SortBy"*/-->
+<!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
+<!--/*@thymesVar id="typeName" type="com.example.api.entities.ProductType"*/-->
+<!--/*@thymesVar id="image" type="com.example.api.entities.Image"*/-->
+    <header th:insert="fragments/admin-panel-header.html :: header"></header>
+    <div class="container mt-40">
+        <div class="row">
+<!--================form=========-->
+            <div class="col-2 offset-10">
+                <a th:href="@{/types}" class="btn btn-outline-success" role="button" aria-pressed="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>    Добавить Тип</a>
+            </div>
+
+            <div class="accordion accordion-flush col-md-12 mt-20" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button bg-primary text-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" th:text="${product.id > 0 ? 'Изменить товар' : 'Добавить Товар'}"/>
+                    </h2>
+                    <div id="flush-collapseOne" th:class="${product.id > 0 ?'accordion-collapse collapse show' : 'accordion-collapse collapse'}" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body row">
+                            <div class="col-md-6">
+                                <img th:if="${product.getImage() != null}" th:src="@{/images/{id}(id=${product.image.id})}" id="imgshow" alt="" width="400px" height="500px"/>
+                                <img th:unless="${product.getImage() != null}" th:src="@{/img/noavailablephoto.jpeg}" id="imgshow" alt="" width="400px" height="500px"/>
+                            </div>
+                            <div class="col-md-6">
+                                <h2 th:text="${product.id > 0 ? 'Изменение существующего товара':'Добавление нового товара'}"></h2>
+                                <form th:action="@{/create}" id="ajax_form" method="POST" th:object="${product}" enctype="multipart/form-data"  class="row">
+                                    <input type="hidden" th:field="*{id}" id="hidden_id"><input type="hidden" name="image" th:value="${image}">
+                                    <div th:if="${product.getId() == null}" class="col-md-12 input-group custom-file-button">
+                                        <label for="formFile" class="input-group-text btn btn-primary"><i class="fa fa-image"></i>Выберите картинку</label>
+                                        <input type="file" class="form-control" id="formFile" name="file" accept="image/jpg, image/jpeg, image/png, image/gif" required/>
+                                    </div>
+                                    <div th:unless="${product.getId() == null}" class="col-md-12 input-group custom-file-button">
+                                        <label for="formFile" class="input-group-text btn btn-primary"><i class="fa fa-image"></i>Изменить картинку</label>
+                                        <input type="file" class="form-control" id="formFile" style="display: none" name="file" accept="image/jpg, image/jpeg, image/png, image/gif" th:text="${product.getImage().getName()}"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="title">Название Продукта: </label>
+                                        <input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="Название Продукта">
+                                    </div>
+                                    <div class="form-group col-md-6 d-flex">
+                                        <div>
+                                            <label for="weightAndPiece">Вес: </label>
+                                            <input type="text" id="weightAndPiece" name="weightAndPiece" th:field="*{weightAndPiece}" class="form-control" placeholder="Количество грамм или кг">
+                                        </div>
+                                        <div class="mx-1">
+                                            <label for="weight"></label>
+                                            <select required class="form-control input-lg" id="weight">
+                                                <option value="гр">гр</option>
+                                                <option value="мл">мл</option>
+                                                <option value="л">л</option>
+                                                <option value="шт">шт</option>
+                                                <option value="пачка">пачка</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="type">Тип</label>
+                                        <select required th:field="*{productType}" class="form-control" id="type">
+                                        <option value="">Ничего не выбрана</option>
+                                        <!--/*@thymesVar id="type" type="com.example.api.entities.ProductType"*/-->
+                                        <option th:each="type : ${types}"
+                                                th:value="${type.getId()}"
+                                                th:text="${type.typeName}"/>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="price">Цена :</label>
+                                        <input type="number" id="price" name="price" class="form-control" th:field="*{price}"><br/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="description">Описание Продукта: </label>
+                                        <textarea id="description" rows="5" name="description" th:field="*{description}" class="form-control" placeholder="Описание Продукта"></textarea><br/>
+                                    </div>
+                                    <input type="hidden" name="pageNo" id="pageNo" th:value="${currentPage}">
+                                    <button type="submit" class="btn btn-primary" id="createandupdateproducts" data-method="serialize" th:text="${product.id > 0 ? 'Сохранить' : 'Создать'}"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--============form-end=============================-->
+
+<!--=============Products-table================-->
+            <div class="table-responsive mt-30">
+                <table class="table table-striped col-md-12 table-bordered ">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID<a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.IDASC} : ${sort.IDDESC})}">|</a></th>
+                            <th scope="col">Картинка</th>
+                            <th scope="col">Название продукта<a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.TITLEASC} : ${sort.TITLEDESC})}">|</a></th>
+                            <th scope="col">Тип</th>
+                            <th scope="col">Вес/объем</th>
+                            <th scope="col">Описание продукта</th>
+                            <th scope="col">Дата Создания <a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.CREATEDATEASC} : ${sort.CREATEDATEDESC})}">|</a></th>
+                            <th scope="col">Цена<a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.PRICEASC} : ${sort.PRICEDESC})}">|</a></th>
+                            <th scope="col">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product : ${products}">
+                            <th scope="row" class="text-center" th:text="${product.id}"/>
+                            <th class="text-center"><img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" width="50px" height="50px"/></th>
+                            <td th:text="${product.title}"/>
+                            <td th:text="${product.productType != null} ? ${product.productType.typeName}"/>
+                            <td th:text="${product.weightAndPiece}"/>
+                            <td th:text="${product.description}"/>
+                            <td th:text="${#dates.format(product.createdAt, 'dd.MM.YY, k:mm ')}"/>
+                            <td th:text="${product.price} + ' тг'"/>
+                            <td>
+                                <a th:href="@{'/page/'+ ${currentPage} + '/edit/' + ${product.id}}" class="btn btn-outline-success" role="button" aria-pressed="true"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a th:href="@{'/page/'+${currentPage}+'/delete/' + ${product.id}}" class="btn btn-outline-danger" role="button" aria-pressed="true"><i class="fa fa-trash" aria-hidden="true"></i>   </a>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+            <!--=============Products-table-END================-->
+        </div>
+    </div>
+</div>
+<!--=========================================-->
+
+
 
 <!--===============Product TABLE============-->
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Изображение</th>
-        <th>Название продукта</th>
-        <th>Описание продукта</th>
-        <th>Количество</th>
-        <th>Тип</th>
-        <th>Цена</th>
-        <th>Дата Создания</th>
-        <th>Действия</th>
-        <th>Edit</th>
-    </tr>
-    </thead>
-    <tbody>
+<div th:text="${'Страница: ' + currentPage} +' из: ' + ${totalPages}"/>
+<span th:text="${'Всего товаров ' + totalElements}"/>
 
-    <tr th:each="product : ${products}">
-        <!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
-        <td th:text="${product.id}"/>
-        <td><img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" width="50px" height="50px"/></td>
-        <td th:text="${product.title}"/>
-        <td th:text="${product.description}"/>
-        <td th:text="${product.weightAndPiece}"/>
-        <!--/*@thymesVar id="typeName" type="com.example.api.entities.ProductType"*/-->
-        <td th:text="${product.productType != null} ? ${product.productType.typeName}"/>
-        <td th:text="${product.price}"/>
-        <td th:text="${#dates.format(product.createdAt, 'dd.MM.yyyy E - k:mm ')}"/>
+<!--=================================================================-->
 
-        <td>
-            <a th:href="@{'/products/show/' + ${product.id}}" th:text="Просмотреть"/>
-        </td>
-        <td>
-            <a th:href="@{/products/edit/{id}(id = ${product.id})}"th:text="Edit"/>
-            <a th:href="@{'/delete/' + ${product.id}}" th:text="Delete"/>
-        </td>
-        <td>
-            <!--                <form th:action="@{/products/delete/{id}(id=${product.id})}" th:method="POST">-->
-            <!--&lt;!&ndash;                    <input type="hidden" name="id" th:value="${product.id}" />&ndash;&gt;-->
-            <!--                    <button type="submit">Delete</button>-->
-            <!--                </form>-->
-        </td>
-    </tr>
-    </tbody>
-</table>
-<span th:text="${'Всего товаров ' + products.size()}"/>
+<div th:if="${totalPages > 1}"></div>
+<div class="row col-sm-10">
+    <div class="col-sm-2">Pagination</div>
+    <div class="col-sm-1 page-item">
+        <div class="col-sm-1 page-item">
+            <a th:if="${currentPage==1}">Previous</a>
+            <a th:if="${currentPage!=1}" th:href="@{'/admin/page/'+${currentPage - 1}}">Previous</a>
+
+        </div>
 
 
+    </div>
+
+    <div class="col-sm-1">
+  <span class="page-item" th:each="i: ${#numbers.sequence(1,totalPages)}">
+  <a th:if="${currentPage!=i && totalPages != 0}" th:href="@{'/admin/page/'+${i}}">[[${i}]]</a>
+  <span th:unless="${currentPage!=i}">[[${i}]]</span>
+  </span>
+
+    </div>
+    <div class="col-sm-1 page-item">
+        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/page/'+${currentPage + 1}}">Next</a>
+        <span class="page-item" th:unless="${currentPage < totalPages}">Next</span>
+    </div>
+    <div class="col-sm-1">
+        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/page/'+${totalPages}}">Last</a>
+        <span class="page-item" th:unless="${currentPage < totalPages}">Last</span>
+    </div>
+</div>
+</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    $('document').ready(function () {
+        //===========Left Product Image in the Admin Panel==========
+        $("#formFile").change(function (e) {
+            e.preventDefault();
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgshow').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    //    =========================
+
+    //    ==========Create And Update Products Ajax========
+    //     $('#createandupdateproducts').click(async function (e){
+    //         e.preventDefault();
+
+            // formData.append('id', $('#hidden_id').val());
+            // formData.append('image', $('#formFile').files[0]);
+            // formData.append('title', $('#title').val());
+            // formData.append('weightAndPiece', $('#weightAndPiece').val());
+            // formData.append('productType', $('#type').val());
+            // formData.append('price', $('#price').val());
+            // formData.append('description', $('#description').val());
+            // formData.append('pageNo', $('#pageNo').val());
+            // formData.append('file', $('#formFile').files[0]);
+
+            // var $data = {};
+// переберём все элементы input, textarea и select формы с id="myForm "
+//             $('#ajax_form').find ('input, textearea, select, input[type=file]').each(function() {
+                // добавим новое свойство к объекту $data
+                // имя свойства – значение атрибута name элемента
+                // значение свойства – значение свойство value элемента
+                // $data[this.name] = $(this).val();
+            // });
+            // if ($(this).attr('data-method') == 'serialize') {
+            //     $data = $(this).parent('form').serialize();
+            // }
+
+            // $.ajax({
+            //     url: '/create',
+            //    type:'POST',
+            //
+            //     data: formData,
+                // mimeTypes:'multipart/form-data',
+                // contentType: 'multi-part/formdata',
+            //     cache: false,
+            //     processData: false,
+            //     success: function (result){
+            //        console.log(this.data);
+            //     },
+            //     error: function(err){
+            //         console.log(this.data);
+            //     }
+            // });
+
+        // });
+
+
+        // var formElem = document.getElementById("ajax_form");
+        //
+        // formElem.onsubmit = async (e) => {
+        //     e.preventDefault();
+        //
+        //     let response = await fetch('/create', {
+        //         method: 'POST',
+        //         body: new FormData(formElem)
+        //     });
+        //
+        //     let result = await response.clone();
+        //
+        //     alert(result.message);
+        // };
+    });
+</script>
 </body>
 </html>

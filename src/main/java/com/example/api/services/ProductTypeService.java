@@ -4,6 +4,7 @@ import com.example.api.entities.ProductType;
 import com.example.api.repositories.ProductTypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ProductTypeService {
     @Autowired
     private ProductTypeRepository typeRepository;
 
+    @Cacheable
     public List<ProductType> productTypeList(){
         return typeRepository.findAll();
     }

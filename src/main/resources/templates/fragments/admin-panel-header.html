@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header-head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-panel-header.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css">-->
+</head>
+
+<body>
+    <header id="header" th:fragment="header" class="">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <div class="menu">
+                        <a class="admin-burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                        <h5 class="panel__admin_h5">Panel Admin</h5>
+                    </div>
+                </div>
+                <div class="col-4">
+
+                    <ul class="nav justify-content-between">
+                        <li class="dropdown">
+                            <a class=" dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope fa-fw"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="text-center" href="#">
+                                        <strong>Read All Messages</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-messages -->
+                        </li>
+                        <!-- /.dropdown -->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
+                                <i class="fa fa-bell fa-fw"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <i class="fa fa-comment fa-fw"></i> New Comment
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                            <span class="pull-right text-muted small">12 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <i class="fa fa-tasks fa-fw"></i> New Task
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="text-center" href="#">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-alerts -->
+                        </li>
+                        <!-- /.dropdown -->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

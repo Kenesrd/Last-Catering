@@ -1,14 +1,13 @@
 package com.example.api.entities;
 
-import com.example.api.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 import java.util.Date;
-import java.util.List;
 
 
 @AllArgsConstructor
@@ -17,18 +16,16 @@ import java.util.List;
 @Entity
 @Table(name = "types_of_products")
 public class ProductType {
+
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String typeName;
+
+    @PastOrPresent
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
-
-//    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-//    private List<Product> products = new ArrayList<>();
-//
-//    public void addProduct(Product product){
-//        this.products.add(product);
-//    }
 }

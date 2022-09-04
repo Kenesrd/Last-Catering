@@ -11,5 +11,10 @@ spring:
       max-file-size: -1
       max-request-size: -1
 
+products:
+  size:
+    page-size: 5
+
+
 
 

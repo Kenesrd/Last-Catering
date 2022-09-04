@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Marmelad&display=swap');
+.fonts12{
+    font-family: 'Marck Script', cursive, sans-serif;
+    font-family: 'Marmelad', sans-serif;/* для p текста */
+}
+body.dark {
+    --text-color: #fff !important;
+    --pink-color: rgb(241, 98, 177);
+    --bg-color: rgb(23,34,44);
+    --reverse-bg-color: #fff;
+    --main-bg-color: #181818;
+    --reversetext-color: rgb(23,34,44);
+}
+body.light{
+    --text-color: rgb(23,34,44);
+    --bg-color: #fff;
+    --reverse-bg-color: rgb(23,34,44);
+    --main-bg-color: #fff;
+    --pink-color: rgb(241, 98, 177);
+    --reversetext-color: #fff;
+}
+html, body,*, *::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: .3s ease-in-out;
+}
+
+body {
+    /*font-family: 'Marck Script', cursive, sans-serif;*/
+    font-weight: 500;
+    font-size: 16px;
+    font-style: normal;
+    /* overflow: hidden; */
+}
+html,main,footer,body{
+    background: var(--bg-color);
+}
+section, footer,header,main, .pos-r{
+    position: relative;
+}
+footer{
+    overflow: hidden;
+}
+.img {
+    max-width: 100%;
+    transition: all 0.3s ease-out 0s;
+}
+
+
+.fix {
+    overflow: hidden;
+}
+button, input{
+    font-family: 'Marmelad', sans-serif;
+}
+a, button {
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+a:focus, button:focus {
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+}
+
+button:focus, input:focus, input:focus, textarea, textarea:focus {
+    outline: 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+h4, h5, h6 {
+    color: var(--text-color);
+    margin-top: 0px;
+    font-style: normal;
+    font-weight: 800;
+}
+
+h1, h2, h3 {
+    margin-top: 0px;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 30px;
+    /*color: #5d5a77;
+    */
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-family: 'Marmelad', sans-serif;
+}
+
+hr {
+    border-bottom: 1px solid #eceff8;
+    border-top: 0 none;
+    margin: 30px 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.pink__text{
+    color: var(--pink-color);
+}
+.cer-img {
+    -webkit-animation: rotation 30s linear infinite;
+    -moz-animation: rotation 30s linear infinite;
+    -ms-animation: rotation 30s linear infinite;
+    -o-animation: rotation 30s linear infinite;
+    animation: rotation 30s linear infinite;
+}
+.mar-bottom-col .col-md-3 {
+    margin-bottom: 30px;
+}
+/* All first banners */
+.sub-banner {
+    width: 100%;
+    background-image: url(../img/sub-banner.png);
+    display: inline-block;
+    position: relative;
+}
+.sub-banner:before {
+    content: "";
+    position: absolute;
+    background: rgba(6, 6, 6, .9);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.text-line ul li {
+    float: left;
+    margin: 0px 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Marmelad', sans-serif;
+}
+.text-line{
+    position: relative;
+    color: #fff;
+}
+.text-line h1{
+    color: #fff;
+}
