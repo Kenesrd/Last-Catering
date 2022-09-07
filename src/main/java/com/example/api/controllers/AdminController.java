@@ -1,11 +1,9 @@
 package com.example.api.controllers;
 
 import com.example.api.entities.Product;
-import com.example.api.services.ImageService;
-import com.example.api.services.ProductService;
+import com.example.api.services.ProductServiceImpl;
 import com.example.api.services.ProductTypeService;
 import com.example.api.services.props.SortBy;
-import com.example.api.services.props.PageSizeProps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -19,7 +17,7 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
     @Autowired
     private ProductTypeService typeService;
 

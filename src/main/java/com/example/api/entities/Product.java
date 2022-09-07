@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
@@ -30,14 +28,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Size(message = "Название продукта Не должно быть пустым!", min = 2)
     private String title;
     @NotBlank
+    @Size(message = "Описание продукта Не должно быть пустым!", min = 10)
     @Column(name = "description", columnDefinition = "text")
     private String description;
-    @NotBlank
+    @NotBlank(message = "Выберите тип продукта")
     private String weightAndPiece;
-    @NotNull
-    private BigInteger price;
+    @Positive
+    @NotNull(message = "Цена продукта Не должно быть пустым или отрицательным!")
+    private BigDecimal price;
     @PastOrPresent
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();

@@ -1,0 +1,24 @@
+insert into types_of_products (type_name) values ('Канапе');
+insert into types_of_products (type_name) values ('Тарталетки');
+insert into types_of_products (type_name) values ('Сэндвичи, брускетты');
+insert into types_of_products (type_name) values ('Пирожки');
+insert into types_of_products (type_name) values ('Мини-бургеры');
+insert into types_of_products (type_name) values ('Самса');
+insert into types_of_products (type_name) values ('Пицца');
+insert into types_of_products (type_name) values ('Десерты');
+insert into types_of_products (type_name) values ('Рулетики');
+insert into types_of_products (type_name) values ('Холодные закуски');
+insert into types_of_products (type_name) values ('Горячие закуски');
+insert into types_of_products (type_name) values ('Нарезки');
+insert into types_of_products (type_name) values ('Наборы сыров');
+insert into types_of_products (type_name) values ('Набор колбас');
+insert into types_of_products (type_name) values ('Салаты');
+insert into types_of_products (type_name) values ('Овощи и фрукты');
+insert into types_of_products (type_name) values ('Шашлык');
+insert into types_of_products (type_name) values ('Блины');
+insert into types_of_products (type_name) values ('Готовые сеты');
+insert into types_of_products (type_name) values ('Напитки');
+insert into types_of_products (type_name) values ('Посуда');
+insert into types_of_products (type_name) values ('Столы');
+insert into types_of_products (type_name) values ('Скатерти');
+

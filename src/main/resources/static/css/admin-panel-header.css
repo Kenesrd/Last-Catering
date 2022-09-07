@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Marmelad&display=swap');
 :root{
     --text-color: #fff !important;
-    --pink-color: rgb(241, 98, 177);
+    --pink-color: rgba(241, 98, 177, 0.38);
     --bg-color: rgb(23,34,44);
     --reverse-bg-color: #fff;
     --main-bg-color: #181818;

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 
@@ -23,6 +24,7 @@ public class ProductType {
     private Long id;
 
     @NotBlank
+    @Size(message = "Название типа Не должно быть пустым!", min = 3)
     private String typeName;
 
     @PastOrPresent
