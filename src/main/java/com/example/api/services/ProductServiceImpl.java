@@ -57,7 +57,6 @@ public class ProductServiceImpl implements ProductService {
             sort = Sort.by("id").descending();
         }
         int pageSize = pageSizeProps.getPageSize(); // How many records on per page
-//        System.out.println("Sort name = : " + sort);
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return productRepository.findAll(pageable);
     }
