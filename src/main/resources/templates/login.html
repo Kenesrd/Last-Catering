@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row overflow-hidden" style="height: 100vh;">
+        <div class="col-lg-5 col-md-4 col-sm-12 col-12 main-dark-color d-flex justify-content-center">
+            <div class="login__img align-self-center">
+                <img th:src="@{/img/logo7292.svg}" alt="" width="200" height="200">
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-8 col-sm-12 col-12 main-pink-color d-flex justify-content-center login__form_container">
+            <div class="login__form align-self-center main-dark-color">
+                <div class="sign__list">
+                    <h1>Login</h1>
+                    <form method="POST" th:action="@{/login}" id="loginForm">
+                        <label for="username">Email: </label>
+                        <input type="text" name="username" id="username" /><br/>
+                        <label for="password">Password: </label>
+                        <input type="password" name="password" id="password" /><br/>
+                        <!--    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
+                        <button type="submit">Login</button>
+                    </form>
+                    <p>New here? Click
+                        <a th:href="@{/register}">here</a> to register.</p>
+                    <a href="/oauth2/authorization/facebook">Sign in with Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div th:if="${error}">-->
+<!--    Unable to login. Check your username and password.-->
+<!--</div>-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

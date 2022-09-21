@@ -20,6 +20,6 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     List<Product> findByTitle(String title);
     void deleteById(Long id);
     Optional<Product> findById(Long id);
-    List<Product> findAllByTitleIgnoreCaseStartsWith(String title);
+    Page<Product> findAllByTitleIgnoreCaseStartsWith(String title, Pageable pageable);
 //    Page<Product> findByPagination(Pageable pageable);
 }

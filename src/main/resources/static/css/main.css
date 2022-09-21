@@ -11,6 +11,12 @@ body.dark {
     --main-bg-color: #181818;
     --reversetext-color: rgb(23,34,44);
 }
+.main-dark-color{
+    background: rgb(23,34,44);
+}
+.main-pink-color{
+    background: rgb(241, 98, 177);
+}
 body.light{
     --text-color: rgb(23,34,44);
     --bg-color: #fff;

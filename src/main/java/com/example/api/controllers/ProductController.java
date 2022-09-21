@@ -13,9 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -40,6 +42,11 @@ public class ProductController {
         model.addAttribute("products", productService.getAllProducts(page));
         return "index";
     }
+    @GetMapping("/header")
+    public String header(Model model){
+        model.addAttribute("text", "Hello");
+        return "fragments/admin-panel-header";
+    }
 
 //    @GetMapping("/css")
 //    public String styles(){
@@ -59,17 +66,26 @@ public class ProductController {
 //        return new ProductType();
 //    }
 
-//    @GetMapping("/search")
-//    public String products(@RequestParam(name = "title", required = false) String title, Model model){
-//        model.addAttribute("products", productService.getListProducts(title));
-//        return "products";
-//    }
+    @GetMapping("/search")
+    public String products(@RequestParam(name = "title", required = false) String title, Model model){
+        if (title != null && title != ""){
+            model.addAttribute("title", title);
+            Page<Product> page= productService.findByTitle(title);
+            model.addAttribute("products", page.getContent());
+            model.addAttribute("currentPage", 1);
+            model.addAttribute("totalPages", page.getTotalPages());
+            model.addAttribute("totalElements", page.getTotalElements());
 
-//    @GetMapping("/product/{id}")
-//    public String productInfo(@PathVariable Long id, Model model){
-//        model.addAttribute("product", productService.getProductById(id));
-//        return "product-info";
-//    }
+            model.addAttribute("product", new Product());
+            model.addAttribute("image", null);
+            model.addAttribute("types", typeService.productTypeList());
+            model.addAttribute("sort", SortBy.class);
+            model.addAttribute("trigger", productService.getTrigger()); // Рычаг для сортировки
+            return "admin-panel";
+        }
+        return "redirect:/admin";
+    }
+
 
 
     @GetMapping("/page/{pageNo}/edit/{id}")
@@ -97,12 +113,16 @@ public class ProductController {
 
     @PostMapping("/create")
     public String createOrUpdateProduct(@ModelAttribute Product product,
+                                        Errors errors,
                                         @RequestParam("file") MultipartFile file,
                                         @RequestParam int pageNo) throws IOException {
 //        if (product.getId() == null){ // Если добавим Новый Продукт то перенаправляем на 1 страницу
 //            productService.saveOrUpdateProduct(product, file);
 //            return "redirect:/admin";
 //        }
+        if (errors.hasErrors()){
+            return "admin-panel";
+        }
         productService.saveOrUpdateProduct(product, file);
         return "redirect:/admin/page/" + pageNo;
     }

@@ -7,20 +7,20 @@
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" th:href="@{/css/style.css}">
-<!--    <link rel="stylesheet" th:href="@{/css/default.css}">-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <!--    <link rel="stylesheet" th:href="@{/css/admin-panel-header.css}">-->
-<!--    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">-->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css">-->
 </head>
-<head th:replace="~{fragments/admin-panel-header::header-head}"/>
+<!--<head th:replace="~{fragments/admin-panel-header::header-head}"/>-->
 
 <body>
 <!--/*@thymesVar id="sort" type="com.example.api.services.props.SortBy"*/-->
 <!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
 <!--/*@thymesVar id="typeName" type="com.example.api.entities.ProductType"*/-->
 <!--/*@thymesVar id="image" type="com.example.api.entities.Image"*/-->
-    <header th:insert="fragments/admin-panel-header.html :: header"></header>
+<!--    <header th:include="fragments/admin-panel-header.html :: header(${user})"></header>-->
     <div class="container mt-40">
         <div class="row">
 <!--========================site-info===============-->
@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h2 th:text="${product.id > 0 ? 'Изменение существующего товара':'Добавление нового товара'}"></h2>
-                                <form th:action="@{/create}" id="ajax_form" method="POST" th:object="${product}" enctype="multipart/form-data"  class="row">
+                                <form th:action="@{/create}" id="ajax_form" method="POST" th:object="${product}" enctype="multipart/form-data"  class="row g-3 needs-validation" novalidate>
                                     <input type="hidden" th:field="*{id}" id="hidden_id"><input type="hidden" name="image" th:value="${image}">
                                     <div th:if="${product.getId() == null}" class="col-md-12 input-group custom-file-button">
                                         <label for="formFile" class="input-group-text btn btn-primary"><i class="fa fa-image"></i>Выберите картинку</label>
@@ -119,41 +119,67 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="title">Название Продукта: </label>
-                                        <input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="Название Продукта">
+                                        <input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="Название Продукта" required/>
+                                        <div class="invalid-tooltip validationError"
+                                             th:if="${#fields.hasErrors('title')}"
+                                            th:errors="*{title}">
+                                            Please provide a valid title.
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-6 d-flex">
                                         <div>
                                             <label for="weightAndPiece">Вес: </label>
-                                            <input type="text" id="weightAndPiece" name="weightAndPiece" th:field="*{weightAndPiece}" class="form-control" placeholder="Количество грамм или кг">
+                                            <input type="text" id="weightAndPiece" name="weightAndPiece" th:field="*{weightAndPiece}" class="form-control" placeholder="Количество грамм или кг" required>
+                                            <div class="invalid-tooltip validationError"
+                                                 th:if="${#fields.hasErrors('weightAndPiece')}"
+                                                 th:errors="*{weightAndPiece}">
+                                                Please provide a valid weightAndPiece.
+                                            </div>
                                         </div>
                                         <div class="mx-1">
                                             <label for="weight"></label>
                                             <select required class="form-control input-lg" id="weight">
-                                                <option value="гр">гр</option>
+                                                <option value="гр">г</option>
                                                 <option value="мл">мл</option>
                                                 <option value="л">л</option>
                                                 <option value="шт">шт</option>
                                                 <option value="пачка">пачка</option>
+                                                <option value="пачка">блок</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="type">Тип</label>
-                                        <select required th:field="*{productType}" class="form-control" id="type">
+                                        <label for="typeid">Тип</label>
+                                        <select required th:field="*{productType}" class="form-control" name="type" id="typeid">
                                         <option value="">Ничего не выбрана</option>
                                         <!--/*@thymesVar id="type" type="com.example.api.entities.ProductType"*/-->
                                         <option th:each="type : ${types}"
                                                 th:value="${type.getId()}"
                                                 th:text="${type.typeName}"/>
                                         </select>
+                                        <div class="invalid-tooltip validationError"
+                                             th:if="${#fields.hasErrors('productType')}"
+                                             th:errors="*{productType}">
+                                            Please provide a valid productType.
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="price">Цена :</label>
                                         <input type="number" id="price" name="price" class="form-control" th:field="*{price}"><br/>
+                                        <div class="invalid-tooltip validationError"
+                                             th:if="${#fields.hasErrors('price')}"
+                                             th:errors="*{price}">
+                                            Please provide a valid price.
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="description">Описание Продукта: </label>
                                         <textarea id="description" rows="5" name="description" th:field="*{description}" class="form-control" placeholder="Описание Продукта"></textarea><br/>
+                                        <div class="invalid-tooltip validationError"
+                                             th:if="${#fields.hasErrors('description')}"
+                                             th:errors="*{description}">
+                                            Please provide a valid description.
+                                        </div>
                                     </div>
                                     <input type="hidden" name="pageNo" id="pageNo" th:value="${currentPage}">
                                     <button type="submit" class="btn btn-primary" id="createandupdateproducts" data-method="serialize" th:text="${product.id > 0 ? 'Сохранить' : 'Создать'}"/>
@@ -165,23 +191,52 @@
             </div>
             <!--============form-end=============================-->
 
+            <div  class="form-group row mt-30">
+                <form method="GET" th:action="@{/search}" class="search_table col-lg-3 col-md-4 col-xs-12 col-sm-12 offset-lg-6 offset-md-4 offset-sm-0 offset-xs-0">
+                    <div class="form-outline">
+                        <input type="text" id="admin_search_input" class="form-control" placeholder="Поиск продукта" name="title" th:value="${title != null} ? ${title}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="admin_search_button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+                <div class="col-lg-3 col-md-4 col-xs-12 col-sm-12 filter_select">
+                    <select required class="form-control" name="table_filter" id="table_filter_id">
+                        <option value="IDDESC">
+                            <a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${sort.IDDESC})}"
+                               class="sort_table sort_table_by_id" data-bs-toggle="tooltip" data-bs-placement="top" title="Сортировка по убыванию id" role="button">
+                                Порядок: по умолчанию</a>
+                        </option>
+                        <option value="гр">Цена: по возрастанию</option>
+                        <option value="мл">Цена: по убыванию</option>
+                        <option value="л">Название: А—Я</option>
+                        <option value="шт">Название: Я—А</option>
+                        <option value="пачка">Порядок: сперва новые</option>
+                        <option value="f">Порядок: сперва старые</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+
             <!--=============Products-table================-->
-            <div class="table-responsive mt-30">
+            <div class="table-responsive mt-3">
                 <table class="table table-striped col-md-12 table-bordered" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, .1);">
                     <thead>
                         <tr>
-                            <th scope="col">ID
-                                <a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.IDASC} : ${sort.IDDESC})}" class="sort_table sort_table_by_id" data-bs-toggle="tooltip" data-bs-placement="top" title="Сортировка по убыванию id" role="button">
-                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            <th scope="col">
+                                <a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.IDASC} : ${sort.IDDESC})}" data-bs-toggle="tooltip" data-bs-placement="top" title="Сортировка по убыванию id" role="button">
+                                    ID
                                 </a>
                             </th>
                             <th scope="col">Картинка</th>
-                            <th scope="col">Название продукта<a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.TITLEASC} : ${sort.TITLEDESC})}" class="sort_table sort_table_by_title"><i class="fa fa-arrow-down" aria-hidden="true"></i></a></th>
+                            <th scope="col"><a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.TITLEASC} : ${sort.TITLEDESC})}" class="sort_table sort_table_by_title">Название продукта</a></th>
                             <th scope="col">Тип</th>
                             <th scope="col">Вес/объем</th>
                             <th scope="col">Описание продукта</th>
-                            <th scope="col">Дата Создания <a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.CREATEDATEASC} : ${sort.CREATEDATEDESC})}" class="sort_table sort_table_by_date"><i class="fa fa-arrow-down" aria-hidden="true"></i></a></th>
-                            <th scope="col">Цена<a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.PRICEASC} : ${sort.PRICEDESC})}" class="sort_table sort_table_by_price"><i class="fa fa-arrow-down" aria-hidden="true"></i></a></th>
+                            <th scope="col"><a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.CREATEDATEASC} : ${sort.CREATEDATEDESC})}" class="sort_table sort_table_by_date">Дата Создания  </a></th>
+                            <th scope="col"><a th:href="@{'/page/'+${currentPage}+'/filter/{sort}'(sort = ${trigger} ? ${sort.PRICEASC} : ${sort.PRICEDESC})}" class="sort_table sort_table_by_price">Цена </a></th>
                             <th scope="col">Действия</th>
                         </tr>
                     </thead>
@@ -268,67 +323,6 @@
             }
         });
     //    =========================
-
-    //    ==========Create And Update Products Ajax========
-    //     $('#createandupdateproducts').click(async function (e){
-    //         e.preventDefault();
-
-            // formData.append('id', $('#hidden_id').val());
-            // formData.append('image', $('#formFile').files[0]);
-            // formData.append('title', $('#title').val());
-            // formData.append('weightAndPiece', $('#weightAndPiece').val());
-            // formData.append('productType', $('#type').val());
-            // formData.append('price', $('#price').val());
-            // formData.append('description', $('#description').val());
-            // formData.append('pageNo', $('#pageNo').val());
-            // formData.append('file', $('#formFile').files[0]);
-
-            // var $data = {};
-// переберём все элементы input, textarea и select формы с id="myForm "
-//             $('#ajax_form').find ('input, textearea, select, input[type=file]').each(function() {
-                // добавим новое свойство к объекту $data
-                // имя свойства – значение атрибута name элемента
-                // значение свойства – значение свойство value элемента
-                // $data[this.name] = $(this).val();
-            // });
-            // if ($(this).attr('data-method') == 'serialize') {
-            //     $data = $(this).parent('form').serialize();
-            // }
-
-            // $.ajax({
-            //     url: '/create',
-            //    type:'POST',
-            //
-            //     data: formData,
-                // mimeTypes:'multipart/form-data',
-                // contentType: 'multi-part/formdata',
-            //     cache: false,
-            //     processData: false,
-            //     success: function (result){
-            //        console.log(this.data);
-            //     },
-            //     error: function(err){
-            //         console.log(this.data);
-            //     }
-            // });
-
-        // });
-
-
-        // var formElem = document.getElementById("ajax_form");
-        //
-        // formElem.onsubmit = async (e) => {
-        //     e.preventDefault();
-        //
-        //     let response = await fetch('/create', {
-        //         method: 'POST',
-        //         body: new FormData(formElem)
-        //     });
-        //
-        //     let result = await response.clone();
-        //
-        //     alert(result.message);
-        // };
 
         //=======Всплывающая подсказка tooltipe=========
         var tooltipTriggerList = Array.prototype.slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

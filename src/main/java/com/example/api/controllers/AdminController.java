@@ -31,7 +31,7 @@ public class AdminController {
         model.addAttribute("currentPage", 1);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalElements", page.getTotalElements());
-
+        model.addAttribute("text", "Hello");
         model.addAttribute("product", new Product());
         model.addAttribute("image", null);
         model.addAttribute("types", typeService.productTypeList());

@@ -4,14 +4,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/default.css}">
-    <link rel="stylesheet" th:href="@{/css/admin-panel-header.css}">
     <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-panel-header.css}">
+
+
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css">-->
 </head>
 
-<body>
-    <header id="header" th:fragment="header" class="">
+<body class="light">
+    <header>
+        <div class="container top-bar-container">
+            <div class="row">
+                <div class="admin-burger-container col-3 pt-2 pb-2">
+                    <a class="admin-burger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+                <ul class="top-bar">
+                    <li class="mobile-menu-toggle">
+                        <a href="#" class="menu-toggle">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle menu-toggle" role="button" data-bs-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope fa-fw"></i>
+                        </a>
+                        <ul class="dropdown-menu" x-placement="top-end">
+                            <li>
+                                <a href="#" class="wave-effect waves-effect waves-block">
+                                    <span class="avatar">
+                                        <img src="/images/demo/profile.png" alt="Mr. Chu">
+                                    </span>
+                                    <span class="name">Jas Gillionaire</span>
+                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="wave-effect waves-effect waves-block">
+                                    <span class="avatar">
+                                        <img src="/images/demo/user.jpg" alt="Andrew">
+                                    </span>
+                                    <span class="name">Gurinder Singh</span>
+                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="wave-effect waves-effect waves-block">
+                                    <span class="avatar">
+                                        <img src="/images/demo/profile.png" alt="Mr. Chu">
+                                    </span>
+                                    <span class="name">Andrew the Canadian</span>
+                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="wave-effect waves-effect waves-block">
+                                    <span class="avatar">
+                                        <img src="/images/demo/user.jpg" alt="Mr. Chu">
+                                    </span>
+                                    <span class="name">Artsy Shohan</span>
+                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="wave-effect waves-effect waves-block">
+                                    <span class="avatar">
+                                        <img src="/images/demo/profile.png" alt="Mr. Chu">
+                                    </span>
+                                    <span class="name">Sazzad Shammad</span>
+                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li><a href="/notification" class="dropdown-item all-notifications wave-effect waves-effect waves-block">See more messages <i class="feather icon-arrow-down"></i></a></li>
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
+                    <li></li>
+                    <!-- Profile Menu -->
+                    <li class="btn-group user-account">
+                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="user-content">
+                                <div class="user-name">Andrew Gill</div>
+                                <div class="user-plan">BeeBack Free Tier</div>
+                            </div>
+                            <div class="avatar">
+                                <img src="/images/demo/user.jpg" alt="profile">
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; transform: translate3d(-59px, -171px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <li><a href="/account/profile" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-user"></i> Profile</a></li>
+                            <li><a href="/account/billing" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-dollar-sign"></i> Billing</a></li>
+                            <li><a href="/account/settings" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-settings"></i> Settings</a></li>
+                            <li><a href="/login" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-log-in"></i> Logout</a></li>
+                        </ul>
+                    </li>
+<!--                    <li></li>-->
+                </ul>
+            </div>
+        </div>
+    </header>
+<!--    ================================================================================================-->
+    <div id="header" th:fragment="header()" class="">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-4">
@@ -37,7 +140,9 @@
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-
+                        <li >
+                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#" th:text="${text}"/>
+                        </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
                                 <i class="fa fa-envelope fa-fw"></i>
@@ -165,11 +270,28 @@
                             <!-- /.dropdown-user -->
                         </li>
                         <!-- /.dropdown -->
+                        <li class="btn-group user-account">
+                            <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="user-content">
+                                    <div class="user-name">Andrew Gill</div>
+                                    <div class="user-plan">BeeBack Free Tier</div>
+                                </div>
+                                <div class="avatar">
+                                    <img th:src="@{/img/admin.jpeg}" alt="profile" width="65" height="65">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="/account/profile" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-user"></i> Profile</a></li>
+                                <li><a href="/account/billing" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-dollar-sign"></i> Billing</a></li>
+                                <li><a href="/account/settings" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-settings"></i> Settings</a></li>
+                                <li><a href="/login" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-log-in"></i> Logout</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

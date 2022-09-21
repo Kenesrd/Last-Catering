@@ -65,6 +65,69 @@ table thead tr {
 .accordion-item{
     box-shadow: 4px 4px 30px rgba(0, 0, 0, .2);
 }
+.search_table{
+    position: relative;
+
+}
+.search_table >.form-outline{
+    margin: 15px 0px !important;
+}
+
+#admin_search_input{
+    padding: 2px 3px;
+    font-size: 0.9rem;
+}
+#admin_search_button{
+    top: 15px;
+    right: 10px;
+    position: absolute;
+    padding: 2px 6px;
+    font-size: 0.9rem;
+}
+.filter_select{
+    position: relative;
+    margin: 15px 0px !important;
+}
+#table_filter_id{
+    padding: 2px 3px;
+    font-size: 0.9rem;
+}
+.filter_select::before{
+    content: '';
+    position: absolute; /* Абсолютное позиционирование */
+    border: 4px solid transparent;
+    border-top: 4px solid #2c3034;
+    display: block;
+    width: 0;
+    height: 0;
+    z-index: 2;
+    right: 20px;
+    top: 12px;
+}
+/*=============Login-Start===============*/
+.login__form_container{
+    position: relative;
+}
+.login__form_container::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: url("/img/mural-shape-bg.png");
+    z-index: 1;
+}
+.login__form{
+    border-radius: 16px;
+    color: #fff3cd;
+    z-index: 2;
+    box-shadow: 4px 4px 30px rgba(255, 255, 255, .2);
+}
+.sign__list{
+    padding: 60px;
+}
+/*==============Login-End================*/
 *{
     /*border: 1px solid red;*/
 }

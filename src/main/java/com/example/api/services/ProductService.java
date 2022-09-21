@@ -15,7 +15,7 @@ import java.util.List;
 public interface ProductService {
     @Cacheable
     Page<Product> getAllProducts(Pageable page);
-    List<Product> findByTitle(String title);
+    Page<Product> findByTitle(String title);
     @Transactional
     void saveOrUpdateProduct(@Valid Product product, MultipartFile file) throws IOException;
     void deleteProductById(Long id);

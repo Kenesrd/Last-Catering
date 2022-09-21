@@ -47,8 +47,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByTitle(String title) {
-        return productRepository.findAllByTitleIgnoreCaseStartsWith(title);
+    public Page<Product> findByTitle(String title) {
+        Pageable pageable = PageRequest.of(0, 30, sort);
+        return productRepository.findAllByTitleIgnoreCaseStartsWith(title, pageable);
     }
 
     @Override
@@ -157,9 +158,7 @@ public class ProductServiceImpl implements ProductService {
         Graphics2D g2d = bufferedImageOutput.createGraphics();
         g2d.drawImage(bufferedImageInput, 0, 0, resizeWidth, resizeHeight, null);
         g2d.dispose();
-
         String formatName = imagePathToWrite.substring(imagePathToWrite.lastIndexOf(".") + 1); // Получаем формат jpg
-
         ImageIO.write(bufferedImageOutput, formatName, new File(imagePathToWrite));
     }
 
