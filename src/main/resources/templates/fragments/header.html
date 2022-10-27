@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+<body>
+<!-- =====================Start__Mobile__Menu=============== -->
+<div class="mobile__bg">
+</div>
+<div class="mobile__navigation__block container ">
+    <div class="mobile__close__btn">
+        <div class="close_icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="logowrapper">
+            <a href="#" class="mobile__menu__logo">
+                <img src="img/лого динара.svg" alt="">
+            </a>
+        </div>
+        <!-- <div class="light__dark__mode__mobile">
+            <input type="checkbox" name="checkbox" id="checkbox__mobile" class="checkbox__mobile_class">
+            <label for="checkbox__mobile">
+                <i class="fa fa-moon-o" aria-hidden="true"></i>
+                <i class="fa fa-sun-o" aria-hidden="true"></i>
+                <div class="ball"></div>
+            </label>
+        </div> -->
+        <ul class="mobile__menu">
+            <li>
+                <a href="#" class="user__cabinet"><i class="fa fa-user" aria-hidden="true"></i>Личный кабинет</a>
+            </li>
+            <li>
+                <a href="#" class="mobile__basket__block">
+                    <span class="basket__cart"></span>
+                    <div class="mobile__cart__total">
+                        <p>2 товара</p>
+                        <span>100 000 тг</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="header__search_link">
+                    <form action="" method="get" class="search__form">
+                        <input type="text" class="header__search_input" placeholder="поиск...">
+                        <button type="submit" class="search__btn"></button>
+                    </form>
+                </a>
+            </li>
+            <li class="active_mobile">
+                <a href="#" class="mobile__info"><i class="fa fa-mobile" aria-hidden="true"></i>+7 (775) 391 1931</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>dinarark89@mail.ru</a>
+            </li>
+            <li class="mobile__header__social text-center">
+                <a href="https://www.instagram.com/furshet_aktau7292/?hl=ru" class="header__social__icons" target="_blank" rel="nofollow noopener noreferrer"><i class="fa fa-instagram"></i></a>
+                <a href="https://wa.me/77753911931?text=Здравствуйте Динара, Я насчет кейтеринга." class="header__social__icons" target="_blank" rel="nofollow noopener noreferrer"><i class="fa fa-whatsapp"></i></a>
+            </li>
+        </ul>
+        <!-- <div class="mobile__header__contacts mobile__header__contacts__min">
+            <a class="contacts_rel" href="tel:+77753911931"><i class="fa fa-phone"></i>+7 (775) 391 1931</a>
+            <a class="contacts_rel" href="mailto:dinarark89@mail.ru"><i class="fa fa-envelope"></i>dinarark89@mail.ru</a>
+        </div> -->
+    </div>
+
+</div>
+<!-- ======================End__Mobile__Menu=============== -->
+<header id="user__header">
+    <nav class="header__navigation">
+        <ul class="header__contact_info">
+            <li><a href="#" class="header__social_link"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                <a href="#" class="header__social_link"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#" class="burger__menu burger"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            </li>
+            <li class="mobile_and_email_info">
+                <a href="#" class="mobile__info"><i class="fa fa-mobile" aria-hidden="true"></i>+7 (775) 391 1931</a>
+                <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>dinarark89@mail.ru</a>
+            </li>
+            <li class="form__search">
+                <form action="" method="get" class="search__form">
+                    <input type="text" class="header__search_input" placeholder="поиск...">
+                    <button type="submit" class="search__btn"></button>
+                </form></li>
+
+
+        </ul>
+        <div class="main__logo"><a href="#"><img src="/img/лого динара.svg" alt="Logo"></a></div>
+        <ul class="header__user_info">
+            <li class="user__info">
+                <a href="#" class="user__cabinet"><i class="fa fa-user" aria-hidden="true"></i>Личный кабинет</a>
+            </li>
+
+            <li class="mobile__phone">
+                <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+            </li>
+            <li>
+                <a href="#" class="basket__block">
+                    <span class="basket__cart"></span>
+                    <div class="cart__total">
+                        <p>2 товара</p>
+                        <span>100 000 тг</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="indicator"></div>
+    </nav>
+</header>
+
+
+<script type="text/javascript">
+    // ==========Mobile-Menu===========
+    const burger = document.querySelector(".burger");
+    const mobile_menu = document.querySelector(".mobile__navigation__block");
+    const close_mobile_menu = document.querySelector(".mobile__close__btn");
+    const mobile_dark_bg = document.querySelector(".mobile__bg");
+    const body = document.querySelector("body");
+
+    // mobileButton.addEventListener('click', () => {
+    //     navBar.classList.toggle("show")});
+
+    burger.addEventListener('click', () => {
+        mobile_menu.classList.add("mobile__navigation__block_active");
+        mobile_dark_bg.classList.add("mobile__bg__active");
+        body.style.overflow = "hidden";
+    });
+    close_mobile_menu.addEventListener('click', ()=>{
+        mobile_menu.classList.remove("mobile__navigation__block_active");
+        mobile_dark_bg.classList.remove("mobile__bg__active");
+        body.style.overflow = "scroll";
+    });
+    mobile_dark_bg.addEventListener('click', ()=>{
+        mobile_menu.classList.remove("mobile__navigation__block_active");
+        mobile_dark_bg.classList.remove("mobile__bg__active");
+        body.style.overflow = "scroll";
+    });
+    // ==========End-Mobile-Menu===========
+</script>
+
+</body>
+</html>

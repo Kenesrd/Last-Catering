@@ -63,9 +63,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void saveOrUpdateProduct(@Valid Product product, MultipartFile file) throws IOException {
+    public void saveOrUpdateProduct(@Valid Product product, MultipartFile file,String typeWeightDetail) throws IOException {
         Image img;
         img = toImageEntity(file);
+        StringBuilder sb = new StringBuilder();
+        sb.append(product.getWeightAndPiece().replaceAll("[^0-9]+", ""));
+        sb.append(" ").append(typeWeightDetail);
+        product.setWeightAndPiece(sb.toString());
         if (file.getSize() != 0){
             product.setImage(img);
         }

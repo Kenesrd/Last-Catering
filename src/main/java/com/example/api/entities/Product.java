@@ -28,7 +28,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Size(message = "Название продукта Не должно быть пустым!", min = 2)
+    @Size(message = "Название продукта Не должно быть пустым!", min = 3)
     private String title;
     @NotBlank
     @Size(message = "Описание продукта Не должно быть пустым!", min = 10)

@@ -1,10 +1,10 @@
 package com.example.api.services;
 
 import com.example.api.dto.UserDto;
+import com.example.api.entities.Role;
 import com.example.api.entities.User;
 import com.example.api.mapper.UserMapper;
 import com.example.api.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService{
 
     @Cacheable
     @Override
+    @Transactional(readOnly = true)
     public List<UserDto> getAllUsers() {
         return userMapper.fromUserList(userRepository.findAll());
     }
@@ -102,5 +103,11 @@ public class UserServiceImpl implements UserService{
             userRepository.save(savedUser);
         }
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserDto> findUsersByRole(Role role) {
+        return userMapper.fromUserList(userRepository.findAllByRole(role));
     }
 }

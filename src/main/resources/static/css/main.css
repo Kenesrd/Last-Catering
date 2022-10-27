@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Marmelad&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+.fonts{
+    font-family: 'Montserrat', sans-serif;
+}
 .fonts12{
     font-family: 'Marck Script', cursive, sans-serif;
     font-family: 'Marmelad', sans-serif;/* для p текста */
@@ -29,7 +33,7 @@ html, body,*, *::after,*::before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: .3s ease-in-out;
+    /*transition: .3s ease-in-out;*/
 }
 
 body {
@@ -50,7 +54,7 @@ footer{
 }
 .img {
     max-width: 100%;
-    transition: all 0.3s ease-out 0s;
+    /*transition: all 0.3s ease-out 0s;*/
 }
 
 
@@ -61,11 +65,11 @@ button, input{
     font-family: 'Marmelad', sans-serif;
 }
 a, button {
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
+    /*-webkit-transition: all 0.3s ease-out 0s;*/
+    /*-moz-transition: all 0.3s ease-out 0s;*/
+    /*-ms-transition: all 0.3s ease-out 0s;*/
+    /*-o-transition: all 0.3s ease-out 0s;*/
+    /*transition: all 0.3s ease-out 0s;*/
 }
 
 a:focus, button:focus {
@@ -152,11 +156,11 @@ hr {
 
 a {
     text-decoration: none;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
+    /*-webkit-transition: all 0.3s ease-out 0s;*/
+    /*-moz-transition: all 0.3s ease-out 0s;*/
+    /*-ms-transition: all 0.3s ease-out 0s;*/
+    /*-o-transition: all 0.3s ease-out 0s;*/
+    /*transition: all 0.3s ease-out 0s;*/
 }
 
 img {

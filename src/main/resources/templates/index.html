@@ -1,48 +1,298 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Catering Aktau</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/preloader_and_scroll.css}">
+    <link rel="stylesheet" th:href="@{/css/animations.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
 
 </head>
 <body>
-    <h1>CATERING</h1>
-    <h4>Товары по Казахстану</h4>
 
-    <div>
-        <h2>Поиск по названию Товара</h2>
-        <form method="get">
-                <input type="text" name="title" th:value="${title != null} ? ${title}">
-            <button type="submit">Поиск</button>
-        </form>
+<!-- =====================Start__Mobile__Menu=============== -->
+<div class="mobile__bg">
+</div>
+<div class="mobile__navigation__block container ">
+    <div class="mobile__close__btn">
+        <div class="close_icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="logowrapper">
+            <a href="#" class="mobile__menu__logo">
+                <img src="img/лого динара.svg" alt="">
+            </a>
+        </div>
+        <!-- <div class="light__dark__mode__mobile">
+            <input type="checkbox" name="checkbox" id="checkbox__mobile" class="checkbox__mobile_class">
+            <label for="checkbox__mobile">
+                <i class="fa fa-moon-o" aria-hidden="true"></i>
+                <i class="fa fa-sun-o" aria-hidden="true"></i>
+                <div class="ball"></div>
+            </label>
+        </div> -->
+        <ul class="mobile__menu">
+            <li>
+                <a href="#" class="user__cabinet"><i class="fa fa-user" aria-hidden="true"></i>Личный кабинет</a>
+            </li>
+            <li>
+                <a href="#" class="mobile__basket__block">
+                    <span class="basket__cart"></span>
+                    <div class="mobile__cart__total">
+                        <p>2 товара</p>
+                        <span>100 000 тг</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="header__search_link">
+                    <form action="" method="get" class="search__form">
+                        <input type="text" class="header__search_input" placeholder="поиск...">
+                        <button type="submit" class="search__btn"></button>
+                    </form>
+                </a>
+            </li>
+            <li class="active_mobile">
+                <a href="#" class="mobile__info"><i class="fa fa-mobile" aria-hidden="true"></i>+7 (775) 391 1931</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>dinarark89@mail.ru</a>
+            </li>
+            <li class="mobile__header__social text-center">
+                <a href="https://www.instagram.com/furshet_aktau7292/?hl=ru" class="header__social__icons" target="_blank" rel="nofollow noopener noreferrer"><i class="fa fa-instagram"></i></a>
+                <a href="https://wa.me/77753911931?text=Здравствуйте Динара, Я насчет кейтеринга." class="header__social__icons" target="_blank" rel="nofollow noopener noreferrer"><i class="fa fa-whatsapp"></i></a>
+            </li>
+        </ul>
+        <!-- <div class="mobile__header__contacts mobile__header__contacts__min">
+            <a class="contacts_rel" href="tel:+77753911931"><i class="fa fa-phone"></i>+7 (775) 391 1931</a>
+            <a class="contacts_rel" href="mailto:dinarark89@mail.ru"><i class="fa fa-envelope"></i>dinarark89@mail.ru</a>
+        </div> -->
     </div>
 
-    <!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
-    <div th:each="product : ${products}">
-        <img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" alt="" width="100px" height="100px"><br/>
-        <h3 th:text="${product.title}"/>
-        <p th:text="${product.description}"/>
-        <p th:text="${product.weightAndPiece}"/>
-<!--        <div>Тип: <span th:text="${product.productTypes}"/></div>-->
-        <div>Цена: <span th:text="${product.price}"/></div>
-        <br/>
-    </div>
+</div>
+<!-- ======================End__Mobile__Menu=============== -->
+<header th:insert="~{fragments/header :: #user__header}"></header>
+<!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
+
+<!-- scroll-top -->
+<button class="scroll-top scroll-to-target" data-target="html" id="scroll-to-target">
+    <i class="fa fa-angle-up"></i>
+</button>
+<a href="#0" class="fly__cart">
+</a>
+<!-- scroll-top-end -->
+<!-- Contacts-scroll -->
+<div class="wrapper">
+    <input type="checkbox" class="mobScroll__btn_input" id="mobScroll__btn_input_id">
+    <label for="mobScroll__btn_input_id" class="mobScroll__btn_label">
+        <svg class="t898__icon t898__icon-write" width="35" height="32" viewBox="0 0 35 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.2667 12.6981H23.3667M11.2667 16.4717H23.3667M4.8104 23.5777C2.4311 21.1909 1 18.1215 1 14.7736C1 7.16679 8.38723 1 17.5 1C26.6128 1 34 7.16679 34 14.7736C34 22.3804 26.6128 28.5472 17.5 28.5472C15.6278 28.5472 13.8286 28.2868 12.1511 27.8072L12 27.7925L5.03333 31V23.8219L4.8104 23.5777Z" stroke="#ffffff" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="t898__icon t898__icon-close" viewBox="0 0 23 23">
+            <g fillrule="evenodd">
+                <path d="M10.314 -3.686H12.314V26.314H10.314z" transform="rotate(-45 11.314 11.314)"></path>
+                <path d="M10.314 -3.686H12.314V26.314H10.314z" transform="rotate(45 11.314 11.314)"></path>
+            </g>
+        </svg>
+    </label>
+    <a class="t898__icon t898__icon-whatsapp_wrapper t898__icon_link" href="https://wa.me/77753911931?text=Здравствуйте Динара, Я насчет кейтеринга." target="_blank" rel="nofollow noopener noreferrer">
+        <span class="t898__tooltip t-name t-name_xs"> WhatsApp </span> <svg width="50" height="50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 50a25 25 0 100-50 25 25 0 000 50z" fill="#fff"></path>
+        <path d="M26.1 12a12.1 12.1 0 00-10.25 18.53l.29.46-1.22 4.46 4.57-1.2.45.27a12.1 12.1 0 106.16-22.51V12zm6.79 17.22c-.3.85-1.72 1.62-2.41 1.72-.62.1-1.4.14-2.25-.14-.7-.22-1.37-.47-2.03-.77-3.59-1.57-5.93-5.24-6.1-5.48-.19-.24-1.47-1.97-1.47-3.76 0-1.79.93-2.67 1.25-3.03.33-.37.72-.46.96-.46.23 0 .47 0 .68.02.22 0 .52-.09.8.62l1.1 2.7c.1.18.16.4.04.64s-.18.39-.36.6c-.18.21-.38.47-.54.64-.18.18-.36.38-.15.74.2.36.92 1.55 1.98 2.52 1.37 1.23 2.52 1.62 2.88 1.8.35.18.56.15.77-.1.2-.23.9-1.05 1.13-1.42.24-.36.48-.3.8-.18.33.12 2.09 1 2.44 1.18.36.19.6.28.69.43.09.15.09.88-.21 1.73z" fill="#27D061"></path>
+        <path d="M25 0a25 25 0 100 50 25 25 0 000-50zm1.03 38.37c-2.42 0-4.8-.6-6.9-1.76l-7.67 2 2.05-7.45a14.3 14.3 0 01-1.93-7.2c0-7.92 6.49-14.38 14.45-14.38a14.4 14.4 0 110 28.79z" fill="#27D061"></path>
+    </svg>
+    </a>
+    <a class="t898__icon t898__icon-phone_wrapper t898__icon_link" href="tel:+77753911931" target="_blank" rel="nofollow noopener noreferrer">
+        <span class="t898__tooltip t-name t-name_xs"> Phone </span>
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25 0C11.2 0 0 11.2 0 25C0 38.8 11.2 50 25 50C38.8 50 50 38.8 50 25C50 11.2 38.84 0 25 0Z" fill="#004D73"></path>
+            <path d="M38.66 34.1001L32.44 27.7801C32.3435 27.6746 32.226 27.5904 32.0952 27.5327C31.9643 27.4751 31.8229 27.4453 31.68 27.4453C31.537 27.4453 31.3956 27.4751 31.2647 27.5327C31.1339 27.5904 31.0165 27.6746 30.92 27.7801L27.5 31.2001C26.81 31.8801 25.79 31.8801 25.1 31.2001L18.74 24.8301C18.5778 24.6751 18.4488 24.4889 18.3606 24.2826C18.2724 24.0764 18.227 23.8544 18.227 23.6301C18.227 23.4058 18.2724 23.1838 18.3606 22.9776C18.4488 22.7713 18.5778 22.5851 18.74 22.4301L22.16 19.0001C22.61 18.5601 22.61 17.9201 22.16 17.4801L15.9 11.3101C15.7943 11.209 15.6695 11.13 15.5329 11.0776C15.3963 11.0253 15.2506 11.0008 15.1045 11.0054C14.9583 11.0101 14.8145 11.0439 14.6815 11.1048C14.5485 11.1657 14.429 11.2525 14.33 11.3601C12.33 13.8101 8.65996 20.6201 18.73 30.9101L18.89 31.0601L19.03 31.2101C29.36 41.3501 36.16 37.6801 38.61 35.6701C39.1 35.2701 39.15 34.5401 38.66 34.1001Z" fill="white"></path>
+        </svg>
+    </a>
+</div>
+<!-- End-Contacts-scroll -->
+<main>
+
+    <!-- Sub-Banner -->
+    <section>
+        <div class="sub-banner pt-80 pb-80">
+            <div class="container">
+                <div class="col-md-8  offset-md-2">
+                    <div class="text-center text-line">
+                        <h1 class="wow bounceInDown" data-wow-duration="1s" data-wow-delay=".2s">Меню</h1>
+                        <ul class="text-c">
+                            <li class="wow bounceInLeft" data-wow-duration="1s" data-wow-delay=".3s">Главная</li>
+                            <li>|</li>
+                            <li class="pink__text wow bounceInRight" data-wow-duration="1s" data-wow-delay=".3s">Меню</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end-sub-Banner -->
+    <!--About-End-->
+    <section class="pt-90 pb-60 menu-p">
+        <!-- <span class="af-fo-i77 download-img">
+            <img src="img/r-food.png" alt="">
+        </span>
+        <span class="af-fo-i3 img-cer">
+            <img src="img/food-plate-3.png" alt="">
+        </span> -->
+        <div class="container po-re-z">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="min-con-h">
+                        <h4 class="wow fadeInLRight" data-wow-duration="1s" data-wow-delay=".2s">Меню</h4>
+                        <h2 class="wow slideInLeft" data-wow-duration="1s" data-wow-delay=".3s">
+                            Каталог
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-30 menu-list-mar">
+                <div sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/admin}">Перейти к админ панель</a></div>
+                <!-- ==========Product-Card-start====== -->
+
+                <div class="col-md-3" th:each="product : ${products}">
+                    <div class="menu-box-list">
+                        <div class="img-menu-l">
+                            <a href="menu-detail.html">
+                                <img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" alt="product-image" class="img-fluid">
+                            </a>
+                            <p class="description_product" th:text="${product.description}"/>
+                        </div>
+                        <div class="menu-det">
+                            <h4 th:text="${product.title}"/>
+
+                            <p class="weight__product">Вес: <span th:text="${product.weightAndPiece}"/></p>
+                            <!-- <ul class="test-rating">
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                            </ul> -->
+                            <div class="full-side-l">
+                                <ul>
+                                    <li><span class="current-price" th:text="${#numbers.formatDecimal(product.getPrice(), 1,'DEFAULT', 0,'DEFAULT')} + ' тг'">10.00</span></li>
+                                    <li><a href="#">Заказать</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ==========Product-Card-End====== -->
 
 
+<!--                <div class="col-md-3 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">-->
+<!--                    <div class="menu-box-list">-->
+<!--                        <div class="img-menu-l">-->
+<!--                            <a href="menu-detail.html">-->
+<!--                                <img src="img/mm2.png" alt="" class="img-fluid">-->
+<!--                            </a>-->
+<!--                            &lt;!&ndash; <span class="icon-v">-->
+<!--                                <img src="img/veg.png" alt="" class="img-icon">-->
+<!--                            </span> &ndash;&gt;-->
+<!--                            <p class="description_product"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus est sint corrupti repudiandae reprehenderit, rerum veniam, voluptatibus animi cumque itaque maiores! Molestias voluptates blanditiis minus voluptatum nulla rem eos quidem.</p>-->
+<!--                        </div>-->
+<!--                        <div class="menu-det">-->
+<!--                            <h4>-->
+<!--                                &lt;!&ndash; <a href="menu-detail.html"> &ndash;&gt;-->
+<!--                                Ассорти из овощей-->
+<!--                                &lt;!&ndash; </a> &ndash;&gt;-->
+
+<!--                            </h4>-->
+
+<!--                            <p class="weight__product">Вес: <span>350 г</span></p>-->
+<!--                            &lt;!&ndash; <ul class="test-rating">-->
+<!--                                <li><i class="fa fa-star"></i></li>-->
+<!--                                <li><i class="fa fa-star"></i></li>-->
+<!--                                <li><i class="fa fa-star"></i></li>-->
+<!--                                <li><i class="fa fa-star"></i></li>-->
+<!--                                <li><i class="fa fa-star"></i></li>-->
+<!--                            </ul> &ndash;&gt;-->
+<!--                            <div class="full-side-l">-->
+<!--                                <ul>-->
+<!--                                    <li><span class="current-price">1200 тг</span></li>-->
+<!--                                    <li><a href="#">Заказать</a></li>-->
+<!--                                    &lt;!&ndash; <li><span class="old-price"><strike>$15</strike></span></li> &ndash;&gt;-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </section>
+    <!--footer-Start-->
+
+</main>
 
 
+<!--================================================-->
+<!--    <h1>CATERING</h1>-->
+<!--    <h4>Товары по Казахстану</h4>-->
 
-<!--    <h1>Создать новый Товар</h1>-->
-<!--    <form action="/product/create" method="POST" enctype="multipart/form-data">-->
-<!--        Title : <input type="text" name="title"><br/>-->
-<!--        Description : <input type="text" name="description"><br/>-->
-<!--        Long Rating : <input type="number" name="rating"><br/>-->
-<!--        Image : <input type="file" name="file"><br/>-->
+<!--    <div>-->
+<!--        <h2>Поиск по названию Товара</h2>-->
+<!--        <form method="get">-->
+<!--                <input type="text" name="title" th:value="${title != null} ? ${title}">-->
+<!--            <button type="submit">Поиск</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
-<!--        <button type="submit">Отправить</button>-->
-<!--    </form>-->
+
+<!--    <div th:each="product : ${products}">-->
+<!--        <img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" alt="" width="100px" height="100px"><br/>-->
+<!--        <h3 th:text="${product.title}"/>-->
+<!--        <p th:text="${product.description}"/>-->
+<!--        <p th:text="${product.weightAndPiece}"/>-->
+<!--&lt;!&ndash;        <div>Тип: <span th:text="${product.productTypes}"/></div>&ndash;&gt;-->
+<!--        <div>Цена: <span th:text="${product.price}"/></div>-->
+<!--        <br/>-->
+<!--    </div>-->
+<script type="text/javascript">
+    // ==========Mobile-Menu===========
+    const burger = document.querySelector("#burger");
+    const mobile_menu = document.querySelector(".mobile__navigation__block");
+    const close_mobile_menu = document.querySelector(".mobile__close__btn");
+    const mobile_dark_bg = document.querySelector(".mobile__bg");
+    const body = document.querySelector("body");
+
+    // mobileButton.addEventListener('click', () => {
+    //     navBar.classList.toggle("show")});
+
+    burger.addEventListener('click', () => {
+        mobile_menu.classList.add("mobile__navigation__block_active");
+        mobile_dark_bg.classList.add("mobile__bg__active");
+        body.style.overflow = "hidden";
+    });
+    close_mobile_menu.addEventListener('click', ()=>{
+        mobile_menu.classList.remove("mobile__navigation__block_active");
+        mobile_dark_bg.classList.remove("mobile__bg__active");
+        body.style.overflow = "scroll";
+    });
+    mobile_dark_bg.addEventListener('click', ()=>{
+        mobile_menu.classList.remove("mobile__navigation__block_active");
+        mobile_dark_bg.classList.remove("mobile__bg__active");
+        body.style.overflow = "scroll";
+    });
+    // ==========End-Mobile-Menu===========
+</script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
 
 
 </body>

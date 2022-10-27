@@ -1,114 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Marmelad&display=swap');
 *{
-    /*border: 1px solid red;*/
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
 }
-/*body,html{*/
-/*    background-color: #040507 !important;*/
-/*}*/
-/*==========Для кнопки картинки=========*/
-.custom-file-button input[type=file] {
-    margin-left: -2px !important;
-}
-.custom-file-button input[type=file]::-webkit-file-upload-button {
-    display: none;
-}
-.custom-file-button input[type=file]::file-selector-button {
-    display: none;
-}
-.custom-file-button:hover label {
-    cursor: pointer;
-}
-/*===========================*/
-table thead tr {
-    color: #ffffff;
-    font-weight: bold;
-    background: #00b09b;
-    text-align: center;
-}
-.sort_table{
-    color: #4a00e0;
-    margin-left: 7px;
-}
-/*=================*/
-.panel{
-    border-radius: 4px;
-    color: #fff;
-    box-shadow: 4px 4px 30px rgba(0, 0, 0, .2);
-}
-
-.panel-heading {
-    padding: 10px 15px;
-    border-radius: 5px;
-}
-.huge {
-    font-size: 30px;
-    text-align: right;
-}
-.info_text{
-    text-align: right;
-}
-.panel-primary>.panel-heading {
-    background: linear-gradient(to right, #8e2de2, #4a00e0)!important;
-}
-.panel-green>.panel-heading{
-    background: #00b09b;
-    background: -webkit-linear-gradient( 45deg , #00b09b, #96c93d)!important;
-    background: linear-gradient( 45deg , #00b09b, #96c93d)!important;
-}
-.panel-yellow>.panel-heading{
-    background: linear-gradient(to right, #f7971e, #ffd200)!important;
-}
-.panel-red>.panel-heading{
-    background: #ee0979;
-    background: -webkit-linear-gradient( 45deg , #ee0979, #ff6a00)!important;
-    background: linear-gradient( 45deg , #ee0979, #ff6a00)!important;
-}
-.accordion-item{
-    box-shadow: 4px 4px 30px rgba(0, 0, 0, .2);
-}
-.search_table{
-    position: relative;
-
-}
-.search_table >.form-outline{
-    margin: 15px 0px !important;
-}
-
-#admin_search_input{
-    padding: 2px 3px;
-    font-size: 0.9rem;
-}
-#admin_search_button{
-    top: 15px;
-    right: 10px;
-    position: absolute;
-    padding: 2px 6px;
-    font-size: 0.9rem;
-}
-.filter_select{
-    position: relative;
-    margin: 15px 0px !important;
-}
-#table_filter_id{
-    padding: 2px 3px;
-    font-size: 0.9rem;
-}
-.filter_select::before{
-    content: '';
-    position: absolute; /* Абсолютное позиционирование */
-    border: 4px solid transparent;
-    border-top: 4px solid #2c3034;
-    display: block;
-    width: 0;
-    height: 0;
-    z-index: 2;
-    right: 20px;
-    top: 12px;
-}
-
 /* ==================Login-style-start======================= */
+body{
+    scrollbar-width: thin;          /* "auto" или "thin"  */
+    scrollbar-color: blue orange;
+}
 .login__row{
     height: 100%;
     position: relative;
@@ -356,6 +257,12 @@ table thead tr {
     color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
 }
+.input100{
+    z-index: 20 !important;
+}
+*{
+    /* border: 1px solid red; */
+}
 /* ===mobile_login==== */
 @media only screen and (max-width: 767px){
     .login__row{
@@ -367,6 +274,9 @@ table thead tr {
         -webkit-box-reflect: below 0px linear-gradient(transparent, transparent);
         margin: 20px 0;
     }
+    /* .wrap__login{
+        padding: 40px 20px;
+    } */
     .wrap__login{
         margin-top: 40px;
         padding: 40px 20px;
@@ -383,6 +293,3 @@ table thead tr {
     }
 }
 /* ==================Login-style-end======================= */
-*{
-    /*border: 1px solid red;*/
-}

@@ -1,10 +1,13 @@
 package com.example.api.controllers;
 
+import com.example.api.dto.UserDto;
 import com.example.api.entities.Image;
 import com.example.api.entities.Product;
+import com.example.api.entities.Role;
 import com.example.api.services.ImageService;
 import com.example.api.services.ProductServiceImpl;
 import com.example.api.services.ProductTypeService;
+import com.example.api.services.UserService;
 import com.example.api.services.props.SortBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -30,6 +34,8 @@ public class ProductController {
     private ProductTypeService typeService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String index(Model model,@RequestParam(value = "title", required = false) String title){
@@ -56,7 +62,10 @@ public class ProductController {
 //    public String styles(){
 //        return "style";
 //    }
-
+//    @GetMapping("/js")
+//    public String javaScript(){
+//        return "script";
+//    }
 
 //  Для АДМИНА
 
@@ -89,7 +98,7 @@ public class ProductController {
 
 
     @GetMapping("/page/{pageNo}/edit/{id}")
-    public String editProduct(@PathVariable int pageNo, @PathVariable Long id, Model model){
+    public String editProduct(@PathVariable int pageNo, @PathVariable Long id, Model model, Principal principal){
         Page<Product> page = productService.findByPagination(pageNo);
         List<Product> products = page.getContent();
         Product productById = productService.getProductById(id);
@@ -100,6 +109,10 @@ public class ProductController {
         model.addAttribute("totalElements", page.getTotalElements());
         model.addAttribute("sort", SortBy.class);
         model.addAttribute("trigger", productService.getTrigger()); // Рычаг для сортировки
+        model.addAttribute("users", userService.getAllUsers().size());
+        model.addAttribute("admins", userService.findUsersByRole(Role.ADMIN).size());
+        UserDto userDto = userService.findByEmail(principal.getName());
+        model.addAttribute("user", userDto.getEmail());
 
         if (productById.getImage() != null){
             Image imgId = imageService.findById(productById.getImageId());
@@ -115,7 +128,8 @@ public class ProductController {
     public String createOrUpdateProduct(@ModelAttribute Product product,
                                         Errors errors,
                                         @RequestParam("file") MultipartFile file,
-                                        @RequestParam int pageNo) throws IOException {
+                                        @RequestParam int pageNo,
+                                        @RequestParam String typeWeightDetail) throws IOException {
 //        if (product.getId() == null){ // Если добавим Новый Продукт то перенаправляем на 1 страницу
 //            productService.saveOrUpdateProduct(product, file);
 //            return "redirect:/admin";
@@ -123,7 +137,7 @@ public class ProductController {
         if (errors.hasErrors()){
             return "admin-panel";
         }
-        productService.saveOrUpdateProduct(product, file);
+        productService.saveOrUpdateProduct(product, file, typeWeightDetail);
         return "redirect:/admin/page/" + pageNo;
     }
 

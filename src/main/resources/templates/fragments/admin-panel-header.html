@@ -3,9 +3,6 @@
 <head th:fragment="header-head">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" th:href="@{/css/default.css}">
     <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
     <link rel="stylesheet" th:href="@{/css/admin-panel-header.css}">
 
@@ -13,285 +10,150 @@
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css">-->
 </head>
 
-<body class="light">
-    <header>
-        <div class="container top-bar-container">
-            <div class="row">
-                <div class="admin-burger-container col-3 pt-2 pb-2">
-                    <a class="admin-burger">
+    <body>
+        <header class="header__admin" th:fragment="header(user)">
+            <nav class="nav__admin">
+                <!-- =========Burger-start========== -->
+                <div class="burger__container_admin">
+                    <a class="burger__admin">
                         <span></span>
                         <span></span>
                         <span></span>
                     </a>
+                    <h3 class="panel__text_admin_h3">Админ панель</h3>
                 </div>
-                <ul class="top-bar">
-                    <li class="mobile-menu-toggle">
-                        <a href="#" class="menu-toggle">
-                            <i class="fa fa-bars"></i>
-                        </a>
+                <!-- =========Burger-end========== -->
+
+                <ul class="main__menu_admin">
+                    <li class="main__menu_admin_list" id="mobile__burger_admin">
+                        <a href="#" class="main__menu_admin_ref"><i class="fa fa-bars" aria-hidden="true"></i></a>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle menu-toggle" role="button" data-bs-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope fa-fw"></i>
+                    <li class="main__menu_admin_list">
+                        <a href="#" class="main__menu_admin_ref connect__new_users_block">
+                            <i class="fa fa-envelope fa-fw"><span class="notification__count">2</span></i>
                         </a>
-                        <ul class="dropdown-menu" x-placement="top-end">
+                        <ul class="submenu-hidden notify__admin connect__new_users submenu__admin">
                             <li>
-                                <a href="#" class="wave-effect waves-effect waves-block">
-                                    <span class="avatar">
-                                        <img src="/images/demo/profile.png" alt="Mr. Chu">
-                                    </span>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img th:src="@{/img/noavailablephoto.jpeg}" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Админ</span>
+                                    <span class="message">Новый User</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Админ</span>
+                                    <span class="message">Новый User</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Админ</span>
+                                    <span class="message">Новый User</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
                                     <span class="name">Jas Gillionaire</span>
-                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
+                                    <span class="message">Новый User</span>
                                     <span class="time">45 min</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="wave-effect waves-effect waves-block">
-                                    <span class="avatar">
-                                        <img src="/images/demo/user.jpg" alt="Andrew">
-                                    </span>
-                                    <span class="name">Gurinder Singh</span>
-                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
-                                    <span class="time">45 min</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="wave-effect waves-effect waves-block">
-                                    <span class="avatar">
-                                        <img src="/images/demo/profile.png" alt="Mr. Chu">
-                                    </span>
-                                    <span class="name">Andrew the Canadian</span>
-                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
-                                    <span class="time">45 min</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="wave-effect waves-effect waves-block">
-                                    <span class="avatar">
-                                        <img src="/images/demo/user.jpg" alt="Mr. Chu">
-                                    </span>
-                                    <span class="name">Artsy Shohan</span>
-                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
-                                    <span class="time">45 min</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="wave-effect waves-effect waves-block">
-                                    <span class="avatar">
-                                        <img src="/images/demo/profile.png" alt="Mr. Chu">
-                                    </span>
-                                    <span class="name">Sazzad Shammad</span>
-                                    <span class="message">Like your post: “Contact Form 7 Multi-Step”</span>
-                                    <span class="time">45 min</span>
-                                </a>
-                            </li>
-                            <li><a href="/notification" class="dropdown-item all-notifications wave-effect waves-effect waves-block">See more messages <i class="feather icon-arrow-down"></i></a></li>
                         </ul>
-                        <!-- /.dropdown-messages -->
                     </li>
-                    <li></li>
-                    <!-- Profile Menu -->
-                    <li class="btn-group user-account">
-                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="main__menu_admin_list">
+                        <a href="#" class="main__menu_admin_ref new_order_notify">
+                            <i class="fa fa-bell fa-fw"><span class="notification__count">2</span></i>
+                        </a>
+                        <ul class="submenu-hidden notify__admin new__orders__notify_admin submenu__admin">
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Админ</span>
+                                    <span class="message">Новый Заказ</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Jas Gillionaire</span>
+                                    <span class="message">Новый Заказ</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Пупкин</span>
+                                    <span class="message">Новый Заказ</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="notify__admin_link">
+                                        <span class="avatar">
+                                            <img src="/img/h-food.png" alt="Mr. Chu">
+                                        </span>
+                                    <span class="name">Jas Gillionaire</span>
+                                    <span class="message">Новый Заказ</span>
+                                    <span class="time">45 min</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="main__menu_admin_list">
+                        <a href="#" class="main__menu_admin_ref" id="user__content_link">
                             <div class="user-content">
-                                <div class="user-name">Andrew Gill</div>
-                                <div class="user-plan">BeeBack Free Tier</div>
+                                <div class="user-name" th:text="${user}"/>
                             </div>
                             <div class="avatar">
-                                <img src="/images/demo/user.jpg" alt="profile">
+                                <img th:src="@{/img/noavailablephoto.jpeg}" alt="profile">
                             </div>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; transform: translate3d(-59px, -171px, 0px); top: 0px; left: 0px; will-change: transform;">
-                            <li><a href="/account/profile" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-user"></i> Profile</a></li>
-                            <li><a href="/account/billing" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-dollar-sign"></i> Billing</a></li>
-                            <li><a href="/account/settings" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-settings"></i> Settings</a></li>
-                            <li><a href="/login" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-log-in"></i> Logout</a></li>
+                        <ul class="submenu__admin submenu-hidden" id="menu_admin_settings">
+                            <li class="submenu__list_admin">
+                                <a href="#" class="submenu__ref"><i class="fa fa-user" aria-hidden="true"></i>Профиль</a>
+                            </li>
+                            <li class="submenu__list_admin">
+                                <a href="#" class="submenu__ref"><i class="fa fa-usd" aria-hidden="true"></i>
+                                    Счета</a>
+                            </li>
+                            <li class="submenu__list_admin">
+                                <a href="#" class="submenu__ref"><i class="fa fa-cog" aria-hidden="true"></i>
+                                    Настройки</a>
+                            </li>
+                            <li class="submenu__list_admin">
+                                <a th:href="@{/logout}" class="submenu__ref"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    Выйти</a>
+                            </li>
                         </ul>
                     </li>
-<!--                    <li></li>-->
                 </ul>
-            </div>
-        </div>
-    </header>
+            </nav>
+        </header>
 <!--    ================================================================================================-->
-    <div id="header" th:fragment="header()" class="">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-4">
-                    <div class="menu">
-                        <a class="admin-burger">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </a>
-                        <h5 class="panel__admin_h5">Panel Admin</h5>
-                    </div>
-                </div>
-                <div class="col-4">
 
-                    <ul class="nav justify-content-between">
-                        <li class="dropdown">
-                            <a class=" dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li >
-                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#" th:text="${text}"/>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
-                                <i class="fa fa-envelope fa-fw"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                        </div>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                        </div>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                        </div>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a class="text-center" href="#">
-                                        <strong>Read All Messages</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.dropdown-messages -->
-                        </li>
-                        <!-- /.dropdown -->
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
-                                <i class="fa fa-bell fa-fw"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <i class="fa fa-comment fa-fw"></i> New Comment
-                                            <span class="pull-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                            <span class="pull-right text-muted small">12 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                            <span class="pull-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <i class="fa fa-tasks fa-fw"></i> New Task
-                                            <span class="pull-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                            <span class="pull-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a class="text-center" href="#">
-                                        <strong>See All Alerts</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.dropdown-alerts -->
-                        </li>
-                        <!-- /.dropdown -->
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">
-                                <i class="fa fa-user fa-fw"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                                </li>
-                            </ul>
-                            <!-- /.dropdown-user -->
-                        </li>
-                        <!-- /.dropdown -->
-                        <li class="btn-group user-account">
-                            <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="user-content">
-                                    <div class="user-name">Andrew Gill</div>
-                                    <div class="user-plan">BeeBack Free Tier</div>
-                                </div>
-                                <div class="avatar">
-                                    <img th:src="@{/img/admin.jpeg}" alt="profile" width="65" height="65">
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="/account/profile" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-user"></i> Profile</a></li>
-                                <li><a href="/account/billing" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-dollar-sign"></i> Billing</a></li>
-                                <li><a href="/account/settings" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-settings"></i> Settings</a></li>
-                                <li><a href="/login" class="animsition-link dropdown-item wave-effect waves-effect waves-block"><i class="feather icon-log-in"></i> Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+
+    </body>
 </html>

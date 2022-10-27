@@ -17,7 +17,7 @@ public interface ProductService {
     Page<Product> getAllProducts(Pageable page);
     Page<Product> findByTitle(String title);
     @Transactional
-    void saveOrUpdateProduct(@Valid Product product, MultipartFile file) throws IOException;
+    void saveOrUpdateProduct(@Valid Product product, MultipartFile file, String typeWeightDetail) throws IOException;
     void deleteProductById(Long id);
     Product getProductById(Long id);
     @Cacheable

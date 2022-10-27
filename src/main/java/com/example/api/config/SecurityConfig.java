@@ -37,6 +37,7 @@ public class SecurityConfig {
         return http
 //                .authenticationProvider(authenticationProvider())
                 .authorizeRequests()
+//                .antMatchers("/admin", "/header").hasAnyRole("ADMIN")
                 .antMatchers("/admin", "/header").hasAnyRole("ADMIN")
                 .antMatchers("/", "/**").permitAll()
                 .and()
@@ -46,6 +47,7 @@ public class SecurityConfig {
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .and()
+                .csrf().disable()
                 .build();
     }
 

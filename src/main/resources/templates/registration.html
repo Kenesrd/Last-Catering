@@ -2,26 +2,194 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Taco Cloud</title>
-</head>
-<body>
-<h1>Register</h1>
-<!--/*@thymesVar id="register" type="com.example.api.services.RegistrationForm"*/-->
-<form method="POST" th:action="@{/register}" id="registerForm" th:object="${register}">
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username" th:field="*{username}"/><br/>
-    <label for="username">Surname: </label>
-    <input type="text" name="surname" id="surname" th:field="*{surname}"/><br/>
-    <label for="phone">Phone: </label>
-    <input type="text" name="phone" id="phone" th:field="*{phone}"/><br/>
-    <label for="email">Email: </label>
-    <input type="email" name="email" id="email" th:field="*{email}"/><br/>
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password" th:field="*{password}"/><br/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktau Catering</title>
+    <link rel="shortcut icon" href="img/catering.png" type="image/png">
+    <meta name="description" content="Что такое кейтеринг?
+Aktau catering на рынке кейтеринга с 2006 года. Имеет филиалы в городах: Актау, Мангистау и Жанаозен. 80% наших клиентов остаются с нами в течении многих лет и являются нашими постоянными заказчиками. С нами они проводят свои все мероприятия: фуршеты, кофе брейки, ланчи, домашние банкеты, банкеты в офисе, пикники, делают грандиозные мероприятия или открытие объектов, магазинов, или заказывают доставку закусок когда к ним приходят гости, или просто когда хотят вкусно покушать.">
+    <meta name="keywords" content="Кейтеринг в Актау">
+    <meta name="title" content="Кейтеринг в Актау | Выездной ресторан в Актау">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="canonical" href="https://example.kz">
+    <meta property="og:title" content="Кейтеринг в Актау | Выездной ресторан в Актау">
+    <meta property="og:description" content="Что такое кейтеринг?
+    Aktau catering на рынке кейтеринга с 2006 года. Имеет филиалы в городах: Актау, Мангистау и Жанаозен. 80% наших клиентов остаются с нами в течении многих лет и являются нашими постоянными заказчиками. С нами они проводят свои все мероприятия: фуршеты, кофе брейки, ланчи, домашние банкеты, банкеты в офисе, пикники, делают грандиозные мероприятия или открытие объектов, магазинов, или заказывают доставку закусок когда к ним приходят гости, или просто когда хотят вкусно покушать.">
+    <meta property="og:url" content="https://example.kz/">
+    <meta property="og:image" content=" /images/og.jpg ">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
 
-    <!--      <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.css}">
 
-    <button type="submit">Регистрация</button>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    </head>
+    <body>
+    <div class="container-fluid">
+        <div class="row overflow-hidden login__row">
+            <div class="col-lg-7 col-md-8 col-sm-12 col-12 d-flex justify-content-center login__form_container">
+                <div class="login__form align-self-center">
+                    <div class="wrap__login text-center">
+                        <h3>Регистрация</h3>
+                        <form method="POST" th:action="@{/register}" id="loginForm" th:object="${register}" class="pt-20 login100-form validate-form" >
+                        <div class="wrap-input100 validate-input mb-20" data-validate="Введите имя">
+                            <input class="input100" type="text" name="username" id="username" placeholder="Имя" th:field="*{username}"/>
+                            <span class="focus-input100"></span>
+                            <span class="login_icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="wrap-input100 validate-input mb-15" data-validate="Введите фамилию">
+                            <input class="input100" type="text" name="surname" id="surename" placeholder="Фамилия" th:field="*{surname}"/>
+                            <span class="focus-input100"></span>
+                            <span class="login_icon"><i class="fa fa-male" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="wrap-input100 validate-input mb-15" data-validate="Введите сотовый номер">
+                            <input class="input100" type="tel" name="phone" id="phone" placeholder="Сотовый" th:field="*{phone}"/>
+                            <span class="focus-input100"></span>
+                            <span class="login_icon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="wrap-input100 validate-input mb-15" data-validate="Введите эл почту">
+                            <input class="input100" type="email" name="email" id="email" placeholder="Эл почта" th:field="*{email}"/>
+                            <span class="focus-input100"></span>
+                            <span class="login_icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="wrap-input100 validate-input mb-15" data-validate="Введите пароль">
+                            <input class="input100" type="password" name="password" id="password" placeholder="Пароль" th:field="*{password}"/>
+                            <span class="focus-input100"></span>
+                            <span class="login_icon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                            <!-- <span class="btn-hide-validate"><i class="fa fa-times-circle" aria-hidden="true"></i></span> -->
+                        </div>
+<!--                        <div class="wrap-input100 validate-input mb-15" data-validate="Повторите пароль">-->
+<!--                            <input class="input100" type="password" name="password" id="matchingpassword" placeholder="Повторите пароль" th:field="*{password}"/>-->
+<!--                            <span class="focus-input100"></span>-->
+<!--                            <span class="login_icon"><i class="fa fa-key" aria-hidden="true"></i></span>-->
+<!--                            &lt;!&ndash; <span class="btn-hide-validate"><i class="fa fa-times-circle" aria-hidden="true"></i></span> &ndash;&gt;-->
+<!--                        </div>-->
+                        <button type="submit" class="mb-15 login__button">Регистрация</button>
+                        <div class="forgot_password_container mb-15"><a href="#" class="forgot_password">Забыл пароль</a></div>
+
+                        </form>
+                        <p>Есть Логин. Нажмите <a th:href="@{/login}" class="login__link">здесь</a> что бы войти</p>
+                        <hr>
+                        <div class="other-sign-type">
+                            <div class="left"><span>Или войдите с помощью</span></div>
+                            <div class="right">
+                                <a href="/oauth2/authorization/facebook" class="sign_link_other_service facebook_service"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="sign_link_other_service google_service"></a>
+                            </div>
+                        </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-lg-5 col-md-4 col-sm-12 col-12 d-flex justify-content-center login__img_container">
+            <div class="login__img align-self-center">
+                <img src="img/logo7292.svg" class="logo__img" alt="logo">
+            </div>
+        </div>
+        <div class="bottom-container col-12 text-center">
+            <p>© 2014-2022 Catering 7292 Co., Ltd. All rights reserved.</p>
+        </div>
+        </div>
+    </div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script type="text/javascript">
+    const form = document.querySelector("#loginForm");
+    const username = document.querySelector("#username");
+    const surename = document.querySelector("#surename");
+    const phone = document.querySelector("#phone");
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
+    // const matcingPassword = document.querySelector("#matchingpassword");
+
+    form.addEventListener('submit', function(e){
+        let check = true;
+        check = processingSelecter(username);
+        check = processingSelecter(surename);
+        check = processingSelecter(phone);
+        check = processingSelecter(email);
+        check = processingSelecter(password);
+        // check = processingSelecter(matchingpassword);
+        if (check == false) {
+            e.preventDefault();
+        }
+        return check;
+    });
+
+    function processingSelecter(selecter){
+        return showValidate(selecter);
+    }
+
+    // ======validate
+    function validate (selecter) {
+        let type = selecter.getAttribute('type');
+        let name = selecter.getAttribute('name');
+        const val = selecter.value.trim();
+
+        if (val == "" || type == 'email' || name == 'email'){
+            if(selecter.value.trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null){
+                return false;
+            }
+        } else if(val == "" || type == "text" && val.length < 3){
+            return false;
+        } else if(val == "" || type == "tel" && val.length < 6){
+            return false;
+        } else if(val == "" || type == "password" && val.length < 6){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    const arr = document.querySelectorAll(".input100");
+    arr.forEach((e) => {
+        e.addEventListener('blur', ()=>{
+            processingSelecter(e);
+        });
+    });
+    arr.forEach((e) => {
+        e.addEventListener('focus', ()=>{
+            hideValidate(e.parentElement);
+        });
+    });
+
+    function showValidate(selecter){
+        const alertParent = selecter.parentElement;
+        if(validate(selecter) == false){
+            alertParent.classList.remove("true-validate");
+            alertParent.classList.add("alert-validate");
+            let child = alertParent.querySelector(".btn-hide-validate");
+            if(alertParent.classList.contains("alert-validate") && !alertParent.contains(child)){
+                let error = document.createElement('span');
+                error.className = "btn-hide-validate";
+                error.innerHTML = '<i class="fa fa-times-circle" aria-hidden="true"></i>';
+                alertParent.append(error);
+                error.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    hideValidate(alertParent);
+                });
+            }
+            return false;
+        } else {
+            alertParent.classList.add("true-validate");
+            return true;
+        }
+    }
+
+    function hideValidate(parentSelecter){
+        let childXbtn = parentSelecter.querySelector(".btn-hide-validate");
+        parentSelecter.removeChild(childXbtn);
+        parentSelecter.classList.remove("alert-validate");
+        parentSelecter.classList.remove("true-validate");
+    }
+</script>
 </form>
 </body>
 </html>
