@@ -1,5 +1,6 @@
 package com.example.api.dto;
 
+import com.example.api.entities.Cart;
 import com.example.api.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,5 @@ public class UserDto {
     private String email;
     private String password;
     private Role role;
+    private Cart cart;
 }

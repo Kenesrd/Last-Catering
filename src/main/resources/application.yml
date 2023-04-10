@@ -2,7 +2,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create-drop
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/catering
@@ -15,6 +15,11 @@ products:
   size:
     page-size: 3
 
+
+  servlet:
+    multipart:
+      maxFileSize: 900MB
+      maxRequestSize: 900MB
 
 
 

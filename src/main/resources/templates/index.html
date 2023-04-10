@@ -83,7 +83,7 @@
 </div>
 <!-- ======================End__Mobile__Menu=============== -->
 <header th:insert="~{fragments/header :: #user__header}"></header>
-<!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
+<!--/*@thymesVar id="product" type="com.example.api.dto.ProductDto"*/-->
 
 <!-- scroll-top -->
 <button class="scroll-top scroll-to-target" data-target="html" id="scroll-to-target">
@@ -169,7 +169,7 @@
                     <div class="menu-box-list">
                         <div class="img-menu-l">
                             <a href="menu-detail.html">
-                                <img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" alt="product-image" class="img-fluid">
+                                <img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImage().id})}" alt="product-image" class="img-fluid">
                             </a>
                             <p class="description_product" th:text="${product.description}"/>
                         </div>
@@ -187,7 +187,7 @@
                             <div class="full-side-l">
                                 <ul>
                                     <li><span class="current-price" th:text="${#numbers.formatDecimal(product.getPrice(), 1,'DEFAULT', 0,'DEFAULT')} + ' тг'">10.00</span></li>
-                                    <li><a href="#">Заказать</a></li>
+                                    <li><a th:href="@{'/{id}/cart'(id = ${product.id})}">Заказать</a></li>
                                 </ul>
                             </div>
                         </div>

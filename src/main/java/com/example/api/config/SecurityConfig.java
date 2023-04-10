@@ -35,10 +35,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-//                .authenticationProvider(authenticationProvider())
+//                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/admin").hasRole("ADMIN"));
+                .authenticationProvider(authenticationProvider())
                 .authorizeRequests()
-//                .antMatchers("/admin", "/header").hasAnyRole("ADMIN")
                 .antMatchers("/admin", "/header").hasAnyRole("ADMIN")
+//                .antMatchers("/admin", "/header").hasAnyRole("ADMIN")
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin()

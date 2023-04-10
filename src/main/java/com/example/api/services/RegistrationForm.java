@@ -1,6 +1,7 @@
 package com.example.api.services;
 
 import com.example.api.dto.UserDto;
+import com.example.api.entities.Cart;
 import com.example.api.entities.Role;
 import com.example.api.entities.User;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class RegistrationForm {
     private String password;
 
     public UserDto toUserDto(PasswordEncoder passwordEncoder){
-        return new UserDto(username,surname,phone,email,passwordEncoder.encode(password),Role.ADMIN);
+        return new UserDto(username,surname,phone,email,passwordEncoder.encode(password),Role.ADMIN, new Cart());
     }
 
 }

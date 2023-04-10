@@ -1,23 +1,21 @@
 package com.example.api.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "image")
-public class Image {
+@Data
+@Entity(name = "images")
+public class Image implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "imageSeq", sequenceName = "image_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imageSeq")
     private Long id;
     @NotBlank
     private String name;
@@ -30,4 +28,5 @@ public class Image {
     @NotNull
     @Lob
     private byte[] bytes;
+
 }

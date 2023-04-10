@@ -18,9 +18,8 @@
 
 <body>
 <!--/*@thymesVar id="sort" type="com.example.api.services.props.SortBy"*/-->
-<!--/*@thymesVar id="product" type="com.example.api.entities.Product"*/-->
+<!--/*@thymesVar id="product" type="com.example.api.dto.ProductDto"*/-->
 <!--/*@thymesVar id="typeName" type="com.example.api.entities.ProductType"*/-->
-<!--/*@thymesVar id="image" type="com.example.api.entities.Image"*/-->
 <!--    <header th:include="fragments/admin-panel-header.html :: header(${user})"></header>-->
     <header class="header__admin" th:include="fragments/admin-panel-header.html :: header(${user})"></header>
     <div class="container mt-40">
@@ -93,7 +92,7 @@
 <!--========================end-site-info===============-->
 <!--================form=========-->
             <div class="col-9 col-sm-4 col-md-3 col-lg-2 offset-3 offset-sm-8 offset-md-9 offset-lg-10 mt-3 mb-3">
-                <a th:href="@{/types}" class="btn btn-outline-success" role="button" aria-pressed="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>    Добавить Тип</a>
+                <a th:href="@{/types}" class="btn btn-outline-success" role="button" aria-pressed="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Добавить Тип</a>
             </div>
 
             <div class="accordion accordion-flush col-md-12 mt-20" id="accordionFlushExample">
@@ -104,43 +103,50 @@
                     <div id="flush-collapseOne" th:class="${product.id > 0 ?'accordion-collapse collapse show' : 'accordion-collapse collapse'}" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body row">
                             <div class="col-md-6">
-                                <img th:if="${product.getImage() != null}" class="img-fluid" th:src="@{/images/{id}(id=${product.image.id})}" id="imgshow" alt="" width="400px" height="500px"/>
+                                <img th:if="${product.getImage() != null}" class="img-fluid" th:src="@{/images/{id}(id=${product.getImage().id})}" id="imgshow" alt="" width="400px" height="500px"/>
                                 <img th:unless="${product.getImage() != null}" class="img-fluid" th:src="@{/img/noavailablephoto.jpeg}" id="imgshow" alt="" width="400px" height="500px"/>
                             </div>
                             <div class="col-md-6">
                                 <h2 th:text="${product.id > 0 ? 'Изменение существующего товара':'Добавление нового товара'}"></h2>
-                                <form th:action="@{/create}" id="ajax_form" method="POST" th:object="${product}" enctype="multipart/form-data"  class="row g-3 needs-validation" novalidate>
-                                    <input type="hidden" th:field="*{id}" id="hidden_id"><input type="hidden" name="image" th:value="${image}">
+
+<!--                                ==========================FORM==========================-->
+                                <form th:action="@{/admin}" id="ajax_form" method="POST" th:object="${product}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                                    <input type="hidden" th:field="*{id}" id="hidden_id">
+                                    <input type="hidden" name="image" th:field="*{image}" id="hidden_image_id">
                                     <div th:if="${product.getId() == null}" class="col-md-12 input-group custom-file-button">
                                         <label for="formFile" class="input-group-text btn btn-primary"><i class="fa fa-image"></i>Выберите картинку</label>
                                         <input type="file" class="form-control" id="formFile" name="file" accept="image/jpg, image/jpeg, image/png, image/gif" required/>
                                     </div>
                                     <div th:unless="${product.getId() == null}" class="col-md-12 input-group custom-file-button">
                                         <label for="formFile" class="input-group-text btn btn-primary"><i class="fa fa-image"></i>Изменить картинку</label>
-                                        <input type="file" class="form-control" id="formFile" style="display: none" name="file" accept="image/jpg, image/jpeg, image/png, image/gif" th:text="${product.getImage().getName()}"/>
+                                        <input type="file" class="form-control" id="formFile" style="display: none" name="file" accept="image/jpg, image/jpeg, image/png, image/gif"
+                                               th:text="${product.getImage().getName()}"/>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="title">Название Продукта: </label>
-                                        <input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="Название Продукта" required/>
-                                        <div class="invalid-tooltip validationError"
+                                        <div class=""
                                              th:if="${#fields.hasErrors('title')}"
-                                            th:errors="*{title}">
+                                             th:errors="*{title}">
                                             Please provide a valid title.
                                         </div>
+                                        <input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="Название Продукта" required/>
+
                                     </div>
                                     <div class="form-group col-md-6 d-flex">
                                         <div>
                                             <label for="weightAndPiece">Вес: </label>
-                                            <input type="text" id="weightAndPiece" name="weightAndPiece" th:field="*{weightAndPiece}" class="form-control" placeholder="Количество грамм или кг" required>
-                                            <div class="invalid-tooltip validationError"
+                                            <div class=""
                                                  th:if="${#fields.hasErrors('weightAndPiece')}"
                                                  th:errors="*{weightAndPiece}">
                                                 Please provide a valid weightAndPiece.
                                             </div>
+                                            <input type="text" id="weightAndPiece" name="weightAndPiece" th:field="*{weightAndPiece}" class="form-control" placeholder="Количество грамм или кг" required>
+
                                         </div>
                                         <div class="mx-1">
                                             <label for="weight"></label>
                                             <select required class="form-control input-lg" id="weight" name="typeWeightDetail">
+                                                <option value="">Ничего не выбрана</option>
                                                 <option value="г">г</option>
                                                 <option value="мл">мл</option>
                                                 <option value="л">л</option>
@@ -152,6 +158,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="typeid">Тип</label>
+                                        <span class="validationError" th:if="${#fields.hasErrors('productType')}" th:errors="*{productType}">Name Error</span>
                                         <select required th:field="*{productType}" class="form-control" id="typeid">
                                         <option value="">Ничего не выбрана</option>
                                         <!--/*@thymesVar id="type" type="com.example.api.entities.ProductType"*/-->
@@ -159,29 +166,25 @@
                                                 th:value="${type.getId()}"
                                                 th:text="${type.typeName}"/>
                                         </select>
-                                        <div class="invalid-tooltip validationError"
-                                             th:if="${#fields.hasErrors('productType')}"
-                                             th:errors="*{productType}">
-                                            Please provide a valid productType.
-                                        </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="price">Цена :</label>
-                                        <input type="number" id="price" name="price" class="form-control" th:field="*{price}"><br/>
-                                        <div class="invalid-tooltip validationError"
-                                             th:if="${#fields.hasErrors('price')}"
-                                             th:errors="*{price}">
+                                        <div
+                                                th:if="${#fields.hasErrors('price')}"
+                                                th:errors="*{price}">
                                             Please provide a valid price.
                                         </div>
+                                        <input type="number" id="price" name="price" class="form-control" th:field="*{price}"><br/>
+
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="description">Описание Продукта: </label>
-                                        <textarea id="description" rows="5" name="description" th:field="*{description}" class="form-control" placeholder="Описание Продукта"></textarea><br/>
-                                        <div class="invalid-tooltip validationError"
-                                             th:if="${#fields.hasErrors('description')}"
-                                             th:errors="*{description}">
+                                        <div th:if="${#fields.hasErrors('description')}"
+                                                th:errors="*{description}">
                                             Please provide a valid description.
                                         </div>
+                                        <textarea id="description" rows="5" name="description" th:field="*{description}" class="form-control" placeholder="Описание Продукта"></textarea><br/>
+
                                     </div>
                                     <input type="hidden" name="pageNo" id="pageNo" th:value="${currentPage}">
                                     <button type="submit" class="btn btn-primary" id="createandupdateproducts" data-method="serialize" th:text="${product.id > 0 ? 'Сохранить' : 'Создать'}"/>
@@ -245,7 +248,7 @@
                     <tbody>
                         <tr th:each="product : ${products}">
                             <th scope="row" class="text-center" th:text="${product.id}"/>
-                            <th class="text-center"><img th:src="@{/images/{id}(id=${product.image != null} ? ${product.getImageId()})}" class="rounded mx-auto d-block" width="50px" height="50px"/></th>
+                            <th class="text-center"><img th:src="@{/images/{id}(id=${product.getImage().id != null} ? ${product.getImage().id})}" class="rounded mx-auto d-block" width="50px" height="50px"/></th>
                             <td th:text="${product.title}"/>
                             <td th:text="${product.productType != null} ? ${product.productType.typeName}"/>
                             <td th:text="${product.weightAndPiece}"/>
@@ -253,8 +256,8 @@
                             <td th:text="${#dates.format(product.createdAt, 'dd.MM.YY, k:mm ')}"/>
                             <td th:text="${#numbers.formatDecimal(product.getPrice(), 1,'DEFAULT', 0,'DEFAULT')} + ' тг'"/>
                             <td>
-                                <a th:href="@{'/page/'+ ${currentPage} + '/edit/' + ${product.id}}" class="btn btn-outline-success my-1" role="button" aria-pressed="true"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                <a th:href="@{'/page/'+${currentPage}+'/delete/' + ${product.id}}" class="btn btn-outline-danger my-1" role="button" aria-pressed="true"><i class="fa fa-trash" aria-hidden="true"></i>   </a>
+                                <a th:href="@{'/admin/page/'+ ${currentPage} + '/edit/' + ${product.id}}" class="btn btn-outline-success my-1" role="button" aria-pressed="true"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a th:href="@{'/admin/page/'+${currentPage}+'/delete/' + ${product.id}}" class="btn btn-outline-danger my-1" role="button" aria-pressed="true"><i class="fa fa-trash" aria-hidden="true"></i>   </a>
                             </td>
                         </tr>
                 </table>

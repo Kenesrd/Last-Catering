@@ -1,81 +1,81 @@
-
+-- ============Users=============
 drop sequence if exists user_seq;
 create sequence user_seq start 1 increment 1;
 
 drop table if exists users cascade;
 create table users (
-                       id int8 not null,
-                       email varchar(255),
-                       name varchar(255),
-                       password varchar(255),
-                       phone varchar(255),
-                       role varchar(255),
-                       surname varchar(255),
-                       primary key (id)
-);
+    id int8 not null,
+    email varchar(255),
+    name varchar(255),
+    password varchar(255),
+    phone varchar(255),
+    role varchar(255),
+    surname varchar(255),
+    primary key (id)
+                   );
 
-
+-- ============Products=============
 drop sequence if exists prod_seq;
 create sequence prod_seq start 1 increment 1;
 
 drop table if exists products cascade;
 create table products (
-                          id int8 not null,
-                          created_at timestamp,
-                          description text,
-                          price numeric(19, 2) not null,
-                          title varchar(255),
-                          weight_and_piece varchar(255),
-                          image_id int8,
-                          product_type_id int8 not null,
-                          primary key (id)
-);
+    id int8 not null,
+    created_at timestamp,
+    description text,
+    price numeric(19, 2) not null,
+    title varchar(255),
+    weight_and_piece varchar(255),
+    image_id int8,
+    product_type_id int8 not null,
+    primary key (id)
+                      );
 
-
+-- ============Images=============
 drop sequence if exists image_seq;
 create sequence image_seq start 1 increment 1;
 
 drop table if exists image cascade;
 create table image (
-                       id int8 not null,
-                       bytes oid not null,
-                       content_type varchar(255),
-                       name varchar(255),
-                       original_file_name varchar(255),
-                       size int8 not null, primary key (id)
-);
+    id int8 not null,
+    bytes oid not null,
+    content_type varchar(255),
+    name varchar(255),
+    original_file_name varchar(255),
+    size int8 not null, primary key (id)
+                   );
 
 
-
+-- ============Product_Types=============
 drop sequence if exists prod_type_seq;
 create sequence prod_type_seq start 1 increment 1;
 
 drop table if exists types_of_products cascade;
 create table types_of_products (
-                                   id int8 not null,
-                                   created_at timestamp,
-                                   type_name varchar(255),
-                                   primary key (id)
-);
+    id int8 not null,
+    created_at timestamp,
+    type_name varchar(255),
+    primary key (id)
+                               );
 
-
+-- ============Cart=============
 drop sequence if exists cart_seq;
 create sequence cart_seq start 1 increment 1;
 
 drop table if exists carts cascade;
 create table carts (
-                       id int8 not null,
-                       user_id int8,
-                       primary key (id)
-);
-
+    id int8 not null,
+    user_id int8,
+    primary key (id)
+                   );
+-- ============Cart-Products=============
 drop table if exists cart_products cascade;
 create table cart_products (
-                               cart_id int8 not null,
-                               product_id int8 not null
-);
+    cart_id int8 not null,
+    product_id int8 not null
+                           );
 
-
+-- ==============Alters=========
 
 alter table if exists products drop constraint if exists product_fk_image;
 alter table if exists products add constraint product_fk_image
@@ -96,7 +96,7 @@ alter table if exists carts add constraint carts_fk_user
 alter table if exists cart_products drop constraint if exists cart_products_fk_cart;
 alter table if exists cart_products add constraint cart_products_fk_cart
     foreign key (cart_id) references carts;
-
+-- =================================================
 
 
 

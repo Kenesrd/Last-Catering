@@ -1,6 +1,7 @@
 package com.example.api.repositories;
 
 import com.example.api.entities.Product;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,13 +14,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
-//    @Query(value = "SELECT * FROM products ORDER BY id limit 10", nativeQuery = true)
-//    Iterable<Product> findAll();
-    Page<Product> findAll(Pageable pageable);
+public interface ProductRepository extends JpaRepository<Product, Long> {
+//    Page<Product> findAll(Pageable pageable);
+    List<Product> findAll();
     List<Product> findByTitle(String title);
     void deleteById(Long id);
+
     Optional<Product> findById(Long id);
-    Page<Product> findAllByTitleIgnoreCaseStartsWith(String title, Pageable pageable);
+    List<Product> findAllByTitleIgnoreCaseStartsWith(String title);
+    List<Product> findAllByTitle(String title);
 //    Page<Product> findByPagination(Pageable pageable);
 }

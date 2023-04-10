@@ -1,10 +1,12 @@
 package com.example.api.services;
 
 import com.example.api.dto.UserDto;
+import com.example.api.entities.Cart;
 import com.example.api.entities.Role;
 import com.example.api.entities.User;
 import com.example.api.mapper.UserMapper;
 import com.example.api.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
@@ -77,6 +79,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public void save(UserDto userDto) {
         User user = userMapper.toUser(userDto);
+        Cart cart = userDto.getCart();
+        cart.setUser(user);
         userRepository.save(user);
     }
 

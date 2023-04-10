@@ -1,14 +1,14 @@
 package com.example.api.controllers;
 
+import com.example.api.dto.ProductDto;
 import com.example.api.dto.UserDto;
+import com.example.api.entities.Cart;
 import com.example.api.entities.Image;
 import com.example.api.entities.Product;
 import com.example.api.entities.Role;
-import com.example.api.services.ImageService;
-import com.example.api.services.ProductServiceImpl;
-import com.example.api.services.ProductTypeService;
-import com.example.api.services.UserService;
+import com.example.api.services.*;
 import com.example.api.services.props.SortBy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,14 +26,14 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@SessionAttributes("cart")
+@Slf4j
 public class ProductController {
 
     @Autowired
-    private ProductServiceImpl productService;
+    private ProductService productService;
     @Autowired
     private ProductTypeService typeService;
-    @Autowired
-    private ImageService imageService;
     @Autowired
     private UserService userService;
 
@@ -44,9 +44,14 @@ public class ProductController {
             model.addAttribute("title", title);
             return "index";
         }
-        Pageable page = PageRequest.of(0,30, Sort.by("id").descending());
-        model.addAttribute("products", productService.getAllProducts(page));
+        model.addAttribute("products", productService.getAllProducts());
         return "index";
+    }
+    @GetMapping("/{id}/cart")
+    public String addProductToCart(@PathVariable(value = "id") Long productId, Principal principal){
+//        model.addAttribute("products", productService.getAllProducts());
+        productService.addProductToUserCart(productId, principal.getName());
+        return "redirect:/";
     }
     @GetMapping("/header")
     public String header(Model model){
@@ -76,20 +81,23 @@ public class ProductController {
 //    }
 
     @GetMapping("/search")
-    public String products(@RequestParam(name = "title", required = false) String title, Model model){
+    public String products(@RequestParam(name = "title", required = false) String title, Model model, Principal principal){
         if (title != null && title != ""){
             model.addAttribute("title", title);
-            Page<Product> page= productService.findByTitle(title);
-            model.addAttribute("products", page.getContent());
+            List<ProductDto> productDtos = productService.findByTitle(title);
+            model.addAttribute("products", productDtos);
             model.addAttribute("currentPage", 1);
-            model.addAttribute("totalPages", page.getTotalPages());
-            model.addAttribute("totalElements", page.getTotalElements());
+            model.addAttribute("totalPages", 1);
+            model.addAttribute("totalElements", productDtos.size());
 
-            model.addAttribute("product", new Product());
-            model.addAttribute("image", null);
+            model.addAttribute("product", new ProductDto());
             model.addAttribute("types", typeService.productTypeList());
             model.addAttribute("sort", SortBy.class);
             model.addAttribute("trigger", productService.getTrigger()); // Рычаг для сортировки
+            model.addAttribute("users", userService.getAllUsers().size());
+            model.addAttribute("admins", userService.findUsersByRole(Role.ADMIN).size());
+            UserDto userDto = userService.findByEmail(principal.getName());
+            model.addAttribute("user", userDto.getEmail());
             return "admin-panel";
         }
         return "redirect:/admin";
@@ -97,54 +105,14 @@ public class ProductController {
 
 
 
-    @GetMapping("/page/{pageNo}/edit/{id}")
-    public String editProduct(@PathVariable int pageNo, @PathVariable Long id, Model model, Principal principal){
-        Page<Product> page = productService.findByPagination(pageNo);
-        List<Product> products = page.getContent();
-        Product productById = productService.getProductById(id);
-        model.addAttribute("products", products);
-        model.addAttribute("product", productById);
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalElements", page.getTotalElements());
-        model.addAttribute("sort", SortBy.class);
-        model.addAttribute("trigger", productService.getTrigger()); // Рычаг для сортировки
-        model.addAttribute("users", userService.getAllUsers().size());
-        model.addAttribute("admins", userService.findUsersByRole(Role.ADMIN).size());
-        UserDto userDto = userService.findByEmail(principal.getName());
-        model.addAttribute("user", userDto.getEmail());
 
-        if (productById.getImage() != null){
-            Image imgId = imageService.findById(productById.getImageId());
-            model.addAttribute("image", imgId.getId());
-        } else {
-            model.addAttribute("image", null);
-        }
-        model.addAttribute("types", typeService.productTypeList());
-        return "admin-panel";
-    }
 
-    @PostMapping("/create")
-    public String createOrUpdateProduct(@ModelAttribute Product product,
-                                        Errors errors,
-                                        @RequestParam("file") MultipartFile file,
-                                        @RequestParam int pageNo,
-                                        @RequestParam String typeWeightDetail) throws IOException {
-//        if (product.getId() == null){ // Если добавим Новый Продукт то перенаправляем на 1 страницу
-//            productService.saveOrUpdateProduct(product, file);
-//            return "redirect:/admin";
-//        }
-        if (errors.hasErrors()){
-            return "admin-panel";
-        }
-        productService.saveOrUpdateProduct(product, file, typeWeightDetail);
-        return "redirect:/admin/page/" + pageNo;
-    }
+
 
     @GetMapping("/page/{pageNo}/delete/{id}")
     public String deleteProduct(@PathVariable int pageNo, @PathVariable Long id){
         productService.deleteProductById(id);
-        Page<Product> page = productService.findByPagination(pageNo);
+        Page<ProductDto> page = productService.findByPagination(pageNo);
         if (page.getSize() <= 0 && page.isEmpty()){
             return "redirect:/admin/page/" + --pageNo;
         }

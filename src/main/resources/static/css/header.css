@@ -13,7 +13,7 @@ header{
     height: 60px;
     z-index: 3 !important;
 }
-ul{
+#user__header ul{
     display: flex;
 }
 li{
@@ -262,7 +262,7 @@ span.basket__cart{
     position: relative;
 }
 span.basket__cart::before{
-    background: url(/img/header-icon.png) no-repeat;
+    background: url(/img/cart.png) no-repeat;
     content:'';
     position: absolute;
     top: 0;
@@ -275,6 +275,7 @@ span.basket__cart::before{
 .cart__total p{
     color: #fff;
     font-size: 15px;
+    margin-bottom: 0 !important;
 }
 .cart__total span{
     display: block;
